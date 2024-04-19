@@ -1,0 +1,145 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #0c0c0c;
+  overflow-x: auto;
+  background-color: #020230;
+}
+
+/*header section*/
+.App {
+  position: relative;
+  background-color: #020230;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#headerDiv {
+  position: sticky;
+  min-width: 240px;
+}
+
+.navBrand {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 10px 15px;
+}
+
+@media (min-width: 993px) {
+  #responsive-navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-link {
+  padding: 3px 15px;
+  margin: 10px 15px;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/*end header section*/
+
+/*markets section*/
+.MarketsContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#marketsHeader th:not(:last-child) {
+  border-right: 1px solid #020230;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  backdrop-filter: blur(3px) saturate(131%);
+  -webkit-backdrop-filter: blur(3px) saturate(131%);
+  background-color: rgba(17, 25, 40, 0.59);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+th, td {
+  border: 1px solid #fcdf3e;
+  padding: .3rem;
+  text-align: left;
+}
+
+th {
+  background-color: #fcdf3e;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+}
+
+td {
+  color: #f2f2f2;
+  text-align: center;
+}
+
+#viewChartBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  color:#ffffff;
+  transform-origin: center top;
+}
+
+#viewChartBtn:hover {
+  color:#020230;
+  transform: scale(1.2);
+}
+
+#favBtn {
+  color:#fcdf3e;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.Modal {
+  position: absolute;
+  top: 40px;
+  left: 20%;
+  right: 20%;
+  background: rgb(228, 228, 228);
+  padding: 20px;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#chartBtnContainer {
+  display:flex;
+  justify-content: right;
+}
+
+#chartBtn {
+  color: black;
+}
