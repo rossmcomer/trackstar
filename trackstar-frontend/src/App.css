@@ -31,6 +31,10 @@ body {
   margin: 10px 15px;
 }
 
+#responsive-navbar-nav {
+  outline: none;
+}
+
 @media (min-width: 993px) {
   #responsive-navbar-nav {
     display: flex;
@@ -39,7 +43,7 @@ body {
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(2, 2, 48, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .nav-item {
@@ -73,8 +77,12 @@ table {
   backdrop-filter: blur(3px) saturate(131%);
   -webkit-backdrop-filter: blur(3px) saturate(131%);
   background-color: rgba(17, 25, 40, 0.59);
-  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
+  width: [object Object]px; 
+	height: [object Object]px; 
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
+	-webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
+	-moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
 }
 
 th, td {

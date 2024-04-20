@@ -1,54 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import '../App.css';
-import Modal from 'react-modal';
-import ApexCharts from 'apexcharts';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import '../App.css'
+import Modal from 'react-modal'
+import ApexCharts from 'apexcharts'
 
 const Markets = () => {
-  const [cryptos, setCryptos] = useState([]);
-  const [watchlist, setWatchlist] = useState([]);
-  const [visible, setVisible] = useState(20);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedCrypto, setSelectedCrypto] = useState(null);
+  const [cryptos, setCryptos] = useState([])
+  const [watchlist, setWatchlist] = useState([])
+  const [visible, setVisible] = useState(20)
+  const [modalIsOpen, setIsOpen] = useState(false)
+  const [selectedCrypto, setSelectedCrypto] = useState(null)
+  // const [sortBy, setSortBy] = useState(null)
+  // const [sortOrder, setSortOrder] = useState('ASC')
+
+  // const handleSort = (columnName) => {
+  //   if (sortBy === columnName) {
+  //     setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC')
+  //   } else {
+  //     setSortBy(columnName)
+  //     setSortOrder('ASC')
+  //   }
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
       try {        
-          const result = await axios.get('https://api.coingecko.com/api/v3/search/trending');
-          const trendingCoins = result.data.coins.map(coin => coin.item.id);
+          const result = await axios.get('https://api.coingecko.com/api/v3/search/trending')
+          const trendingCoins = result.data.coins.map(coin => coin.item.id)
           if (trendingCoins.length > 0) {
             const marketDataResponse = await axios.get(`https://api.coingecko.com/api/v3/coins/markets`, {
               params: {
                 vs_currency: 'usd',
                 ids: trendingCoins.join(',')
               }
-            });
+            })
 
-            setCryptos(marketDataResponse.data);
+            setCryptos(marketDataResponse.data)
           }
         
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error)
       }
-    };
+    }
   
-    fetchData();
+    fetchData()
   }, []);
 
   const openModal = (crypto) => {
-    setIsOpen(true);
-    setSelectedCrypto(crypto);
+    setIsOpen(true)
+    setSelectedCrypto(crypto)
   };
 
   const closeModal = () => {
-    setIsOpen(false);
-    setSelectedCrypto(null);
+    setIsOpen(false)
+    setSelectedCrypto(null)
   };
 
   useEffect(() => {
     if (!modalIsOpen || !selectedCrypto) return;
 
-    const fetchData = async () => {
+    const fetchModalData = async () => {
         try {
           const result = await axios.get(`https://api.coingecko.com/api/v3/coins/${selectedCrypto.id}/market_chart?vs_currency=usd&days=90`);
 
@@ -122,7 +133,7 @@ const Markets = () => {
         }
       };
     
-      fetchData();
+      fetchModalData();
     }, [modalIsOpen, selectedCrypto]);
 
   const addToWatchlist = (id) => {
@@ -142,7 +153,7 @@ const Markets = () => {
       <table>
         <thead>
           <tr id="marketsHeader">
-            <th>Ticker</th>
+            <th /*onClick={() => handleSort('ticker')}*/>Ticker</th>
             <th>Price</th>
             <th>Market Cap</th>
             <th>Volume</th>
