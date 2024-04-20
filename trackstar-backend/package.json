@@ -4,12 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3",
     "umzug": "^3.8.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.5",
+    "nodemon": "^3.1.0"
   }
 }
