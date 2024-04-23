@@ -4,22 +4,25 @@ const { sequelize } = require('../util/db')
 
 class FavoritesList extends Model {}
 
-FavoritesList.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+FavoritesList.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: 'users', key: 'id' },
+    },
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: { model: 'users', key: 'id' },
-  }
-}, {
-  sequelize,
-  underscored: true,
-  timestamps: false,
-  modelName: 'favorites_list'
-})
+  {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'favorites_list',
+  },
+)
 
 module.exports = FavoritesList

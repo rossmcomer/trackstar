@@ -5,14 +5,16 @@ const Sessions = require('../models/session')
 const { tokenExtractor } = require('../util/middleware')
 
 router.delete('/', tokenExtractor, async (req, res) => {
-    try {
-        await Sessions.destroy({ where: { 
-            userId: req.decodedToken.id } })
-            res.status(200).json({ message: 'Successfully logged out' })
-    } 
-    catch (error) {
-        res.status(500).json({ error: 'Error logging out' })
-    }
+  try {
+    await Sessions.destroy({
+      where: {
+        userId: req.decodedToken.id,
+      },
+    })
+    res.status(200).json({ message: 'Successfully logged out' })
+  } catch (error) {
+    res.status(500).json({ error: 'Error logging out' })
+  }
 })
 
 module.exports = router

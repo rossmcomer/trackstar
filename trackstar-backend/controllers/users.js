@@ -1,75 +1,71 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
 
-const { User, Favorites } = require('../models')
+const { User, Favorite, FavoritesList } = require('../models')
 
 router.get('/', async (req, res) => {
+  try {
     const users = await User.findAll({
-        include: {
-          model: Favorites,
-          attributes: { exclude: ['userId'] }
-        }
-      })
-  res.json(users)
+      include: {
+        model: Favorite,
+        attributes: { exclude: ['userId'] },
+      },
+    })
+    res.json(users)
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    res.status(500).json({ error: 'Error fetching users' })
+  }
 })
 
 router.post('/', async (req, res) => {
   try {
     const user = await User.create(req.body)
-      res.json(user)
-  } catch(error) {
-      res.status(400).json({ error })
+    res.json(user)
+  } catch (error) {
+    console.error('Error creating user:', error)
+    res.status(400).json({ error: 'Error creating user' })
   }
 })
 
 router.get('/:id', async (req, res) => {
-  let readCheckValue = req.query.read
-
-  const user = await User.findByPk(req.params.id, {
-    attributes: { exclude: ['createdAt', 'updatedAt'] } ,
-    include:[{
-        model: Blog,
-        attributes: { exclude: ['userId'] },
-      },
-      {
-        model: Blog,
-        as: 'marked_blogs',
-        attributes: { exclude: ['userId', 'createdAt', 'updatedAt']},
-        through: {
-          model: ReadingListBlogs,
-          attributes: ['id', 'readCheck'],
-          where: {
-            readCheck: readCheckValue
-          }
+  try {
+    const user = await User.findByPk(req.params.id, {
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: [
+        {
+          model: FavoritesList,
+          include: Favorite,
+          attributes: { exclude: ['userId'] },
         },
-        include: {
-          model: User,
-          attributes: ['name']
-        }
-      }
-    ]
-  })
+      ],
+    })
 
-  if (user) {
-    res.json(user)
-  } else {
-    res.status(404).end()
+    if (user) {
+      res.json(user)
+    } else {
+      res.status(404).json({ error: 'User not found' })
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error)
+    res.status(500).json({ error: 'Error fetching user' })
   }
 })
 
 router.put('/:username', async (req, res) => {
-    const user = await User.findOne({
-        where: {
-            username: req.params.username
-        }
-    })
+  try {
+    const user = await User.findByPk(req.params.username)
     if (user) {
-        user.username = req.body.username
-        await user.save()
+      user.username = req.body.username
+      await user.save()
       res.json(user)
     } else {
-      res.status(404).end()
+      res.status(404).json({ error: 'User not found' })
     }
+  } catch (error) {
+    console.error('Error updating user:', error)
+    res.status(500).json({ error: 'Error updating user' })
+  }
 })
 
 module.exports = router

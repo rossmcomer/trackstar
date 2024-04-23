@@ -6,7 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "prettier": "npx prettier . --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +26,18 @@
     "umzug": "^3.8.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.0.2",
+    "@eslint/js": "^9.1.1",
     "@flydotio/dockerfile": "^0.5.5",
-    "nodemon": "^3.1.0"
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.0.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   }
 }

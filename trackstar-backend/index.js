@@ -22,7 +22,7 @@ const errorHandler = (error, request, response, next) => {
 
   if (error) {
     return response.status(400).send({ error: 'something went wrong' })
-  } 
+  }
   next(error)
 }
 
