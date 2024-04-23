@@ -14,7 +14,7 @@ router.post('/', async (request, response) => {
       username: body.username,
     },
   })
-// ADD MODAL TO CREATE ACCOUNT
+  // ADD MODAL TO CREATE ACCOUNT
   if (!user) {
     return response
       .status(403)
@@ -39,9 +39,7 @@ router.post('/', async (request, response) => {
 
   await Sessions.create({ userId: user.id, sessionId: token })
 
-  response
-    .status(200)
-    .send({ token, username: user.username, name: user.name })
+  response.status(200).send({ token, username: user.username })
 })
 
 module.exports = router
