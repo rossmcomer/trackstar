@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const router = require('express').Router()
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 
 const { SECRET } = require('../util/config')
 const User = require('../models/user')
@@ -21,7 +21,7 @@ router.post('/', async (request, response) => {
       .json({ error: 'User not found. Would you like to create an account?' })
   }
 
-  const passwordCorrect = await bcrypt.compare(
+  const passwordCorrect = await bcryptjs.compare(
     body.password,
     user.passwordHash,
   )

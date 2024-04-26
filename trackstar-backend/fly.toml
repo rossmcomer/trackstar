@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for trackstar-backend-morning-mountain-3206 on 2024-04-19T13:52:28-05:00
+# fly.toml app configuration file generated for trackstar-backend on 2024-04-25T18:17:52-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'trackstar-backend-morning-mountain-3206'
+app = 'trackstar-backend'
 primary_region = 'iad'
 
 [build]

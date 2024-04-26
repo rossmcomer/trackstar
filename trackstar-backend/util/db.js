@@ -36,12 +36,6 @@ const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
     await runMigrations()
-    const blogs = await sequelize.query('SELECT * FROM blogs', {
-      type: QueryTypes.SELECT,
-    })
-    blogs.map((blog) =>
-      console.log(`${blog.author}: '${blog.title}', ${blog.likes} likes`),
-    )
     console.log('connected to the database')
   } catch (err) {
     console.log('failed to connect to the database')

@@ -13,6 +13,7 @@ Favorite.init(
     },
     favoritesListId: {
       type: DataTypes.INTEGER,
+      allowNull:false,
       references: {
         model: 'favorites_list',
         key: 'id',
@@ -26,8 +27,9 @@ Favorite.init(
   {
     sequelize,
     underscored: true,
-    timestamps: false,
+    timestamps: true,
     modelName: 'favorite',
+    updatedAt: false
   },
 )
 

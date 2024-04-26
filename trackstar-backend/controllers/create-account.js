@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { User, Sessions } = require('../models')
 
@@ -9,7 +9,7 @@ router.post('/', async (request, response) => {
   try {
     const newUser = await User.create({
       username: body.username,
-      passwordHash: await bcrypt.hash(body.password, 10),
+      passwordHash: await bcryptjs.hash(body.password, 10),
     })
 
     response

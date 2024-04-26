@@ -1,16 +1,11 @@
 const router = require('express').Router()
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 
 const { User, Favorite, FavoritesList } = require('../models')
 
 router.get('/', async (req, res) => {
   try {
-    const users = await User.findAll({
-      include: {
-        model: Favorite,
-        attributes: { exclude: ['userId'] },
-      },
-    })
+    const users = await User.findAll()
     res.json(users)
   } catch (error) {
     console.error('Error fetching users:', error)
@@ -20,7 +15,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const user = await User.create(req.body)
+    const passwordHash = await bcryptjs.hash(req.body.password, 10)
+    const user = await User.create({ username: req.body.username, passwordHash: passwordHash })
     res.json(user)
   } catch (error) {
     console.error('Error creating user:', error)
@@ -31,11 +27,14 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: {},
       include: [
         {
           model: FavoritesList,
-          include: Favorite,
+          include: [{
+            model: Favorite,
+            attributes: { exclude: ['favoritesListId'] }, // Adjust attributes as needed
+          }],
           attributes: { exclude: ['userId'] },
         },
       ],

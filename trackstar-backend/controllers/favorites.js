@@ -4,7 +4,6 @@ const Sessions = require('../models/session')
 const { tokenExtractor } = require('../util/middleware')
 
 router.get('/', tokenExtractor, async (req, res) => {
-  //   const columnName = req.query.sortBy
   const userId = req.decodedToken.id
   const user = await User.findByPk(req.decodedToken.id)
 
