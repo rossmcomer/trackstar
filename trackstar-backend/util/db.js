@@ -1,4 +1,4 @@
-const { Sequelize, QueryTypes } = require('sequelize')
+const { Sequelize } = require('sequelize')
 const { DATABASE_URL } = require('./config')
 const { Umzug, SequelizeStorage } = require('umzug')
 

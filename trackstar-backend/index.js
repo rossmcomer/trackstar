@@ -1,9 +1,6 @@
 const express = require('express')
 require('express-async-errors')
 const app = express()
-const bcryptjs = require('bcryptjs');
-const saltRounds = 10;
-const { User } = require('./models');
 
 const { PORT } = require('./util/config')
 const { connectToDatabase } = require('./util/db')

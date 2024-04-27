@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
           model: FavoritesList,
           include: [{
             model: Favorite,
-            attributes: { exclude: ['favoritesListId'] }, // Adjust attributes as needed
+            attributes: { exclude: ['favoritesListId'] },
           }],
           attributes: { exclude: ['userId'] },
         },
