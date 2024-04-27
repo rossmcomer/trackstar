@@ -27,15 +27,13 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
-      attributes: {},
       include: [
         {
           model: FavoritesList,
           include: [{
             model: Favorite,
             attributes: { exclude: ['favoritesListId'] },
-          }],
-          attributes: { exclude: ['userId'] },
+          }]
         },
       ],
     })
@@ -51,9 +49,9 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.put('/:username', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.username)
+    const user = await User.findByPk(req.params.id)
     if (user) {
       user.username = req.body.username
       await user.save()

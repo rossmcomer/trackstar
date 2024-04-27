@@ -22,6 +22,7 @@ FavoritesList.init(
     underscored: true,
     timestamps: false,
     modelName: 'favorites_list',
+    freezeTableName: true
   },
 )
 
