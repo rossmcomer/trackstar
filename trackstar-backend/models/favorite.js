@@ -13,7 +13,7 @@ Favorite.init(
     },
     favoritesListId: {
       type: DataTypes.INTEGER,
-      allowNull:false,
+      allowNull: false,
       references: {
         model: 'favorites_list',
         key: 'id',
@@ -29,7 +29,7 @@ Favorite.init(
     underscored: true,
     timestamps: true,
     modelName: 'favorite',
-    updatedAt: false
+    updatedAt: false,
   },
 )
 

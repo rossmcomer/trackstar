@@ -4,7 +4,7 @@ const { User } = require('../models')
 
 router.post('/', async (req, res) => {
   const body = req.body
-  if (req.body.password === req.body.confirm){
+  if (req.body.password === req.body.confirm) {
     try {
       const newUser = await User.create({
         username: body.username,
@@ -18,8 +18,7 @@ router.post('/', async (req, res) => {
       console.error('Error creating account:', error)
       res.status(500).json({ error: 'Failed to create account' })
     }
-  }
-  else {
+  } else {
     res.status(500).json({ error: 'Passwords do not match' })
   }
 })

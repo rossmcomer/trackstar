@@ -6,22 +6,22 @@ module.exports = {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       favorites_list_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: { model: 'favorites_list', key: 'id' },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       ticker: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
       },
       created_at: {
         type: DataTypes.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     })
   },
   down: async ({ context: queryInterface }) => {

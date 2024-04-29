@@ -6,14 +6,14 @@ module.exports = {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       user_id: {
         type: DataTypes.INTEGER,
         unique: true,
         allowNull: false,
-        references: { model: 'users', key: 'id' }
-      }
+        references: { model: 'users', key: 'id' },
+      },
     })
   },
   down: async ({ context: queryInterface }) => {

@@ -5,7 +5,9 @@ const { tokenExtractor } = require('../util/middleware')
 
 router.get('/', tokenExtractor, async (req, res) => {
   const user = await User.findByPk(req.decodedToken.id)
-  const favoritesList = await FavoritesList.findOne({ where: { userId: user.id }})
+  const favoritesList = await FavoritesList.findOne({
+    where: { userId: user.id },
+  })
 
   if (user) {
     try {
@@ -20,8 +22,7 @@ router.get('/', tokenExtractor, async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch favorites' })
     }
-  }
-  else { 
+  } else {
     return res.status(404).json({ error: 'User not found' })
   }
 })
@@ -37,10 +38,14 @@ router.post('/', tokenExtractor, async (req, res) => {
 
   if (user && session) {
     try {
-      let favoritesList = await FavoritesList.findOne({ where: { userId: req.decodedToken.id } })
-      
+      let favoritesList = await FavoritesList.findOne({
+        where: { userId: req.decodedToken.id },
+      })
+
       if (!favoritesList) {
-        favoritesList = await FavoritesList.create({ userId: req.decodedToken.id })
+        favoritesList = await FavoritesList.create({
+          userId: req.decodedToken.id,
+        })
       }
 
       const favorite = await Favorite.create({
@@ -51,8 +56,7 @@ router.post('/', tokenExtractor, async (req, res) => {
     } catch (error) {
       res.status(400).json({ error: 'Failed to add ticker as favorite' })
     }
-  }
-  else { 
+  } else {
     return res.status(404).json({ error: 'User or session not found' })
   }
 })
@@ -65,7 +69,9 @@ const favoriteFinder = async (req, res, next) => {
 router.delete('/:id', favoriteFinder, tokenExtractor, async (req, res) => {
   try {
     const user = await User.findByPk(req.decodedToken.id)
-    const favoritesList = await FavoritesList.findOne({ where: { userId: req.decodedToken.id } })
+    const favoritesList = await FavoritesList.findOne({
+      where: { userId: req.decodedToken.id },
+    })
     const session = await Sessions.findOne({
       where: {
         userId: req.decodedToken.id,
@@ -77,14 +83,12 @@ router.delete('/:id', favoriteFinder, tokenExtractor, async (req, res) => {
       if (req.favorite && req.favorite.favoritesListId === favoritesList.id) {
         await req.favorite.destroy()
         res.status(200).json({ message: 'Favorite successfully removed' })
-      }
-      else {
+      } else {
         res
           .status(403)
           .json({ error: 'You do not have permssion to delete this.' })
       }
-    }
-    else { 
+    } else {
       return res.status(404).json({ error: 'User or session not found' })
     }
   } catch (error) {

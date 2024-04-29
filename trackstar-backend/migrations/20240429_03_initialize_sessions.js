@@ -6,23 +6,23 @@ module.exports = {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       user_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
       },
       session_id: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
       },
       created_at: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updated_at: {
         type: DataTypes.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     })
   },
   down: async ({ context: queryInterface }) => {

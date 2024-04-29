@@ -12,8 +12,8 @@ User.hasOne(FavoritesList, {
 FavoritesList.belongsTo(User, {
   foreignKey: {
     name: 'userId',
-    allowNull: false
-  }
+    allowNull: false,
+  },
 })
 
 FavoritesList.hasMany(Favorite, {
@@ -25,7 +25,7 @@ FavoritesList.hasMany(Favorite, {
 Favorite.belongsTo(FavoritesList, {
   foreignKey: {
     name: 'favoritesListId',
-  }
+  },
 })
 
 module.exports = {

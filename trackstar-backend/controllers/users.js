@@ -16,7 +16,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const passwordHash = await bcryptjs.hash(req.body.password, 10)
-    const user = await User.create({ username: req.body.username, passwordHash: passwordHash })
+    const user = await User.create({
+      username: req.body.username,
+      passwordHash: passwordHash,
+    })
     res.json(user)
   } catch (error) {
     console.error('Error creating user:', error)
@@ -30,10 +33,12 @@ router.get('/:id', async (req, res) => {
       include: [
         {
           model: FavoritesList,
-          include: [{
-            model: Favorite,
-            attributes: { exclude: ['favoritesListId'] },
-          }]
+          include: [
+            {
+              model: Favorite,
+              attributes: { exclude: ['favoritesListId'] },
+            },
+          ],
         },
       ],
     })
