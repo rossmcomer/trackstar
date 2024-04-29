@@ -6,8 +6,8 @@ const { SECRET } = require('../util/config')
 const User = require('../models/user')
 const Sessions = require('../models/session')
 
-router.post('/', async (request, response) => {
-  const body = request.body
+router.post('/', async (req, res) => {
+  const body = req.body
 
   const user = await User.findOne({
     where: {
@@ -16,7 +16,7 @@ router.post('/', async (request, response) => {
   })
   // ADD MODAL TO CREATE ACCOUNT
   if (!user) {
-    return response
+    return res
       .status(403)
       .json({ error: 'User not found. Would you like to create an account?' })
   }
@@ -27,7 +27,7 @@ router.post('/', async (request, response) => {
   )
 
   if (!passwordCorrect) {
-    return response.status(401).json({ error: 'Invalid username or password' })
+    return res.status(401).json({ error: 'Invalid username or password' })
   }
 
   const userForToken = {
@@ -39,7 +39,7 @@ router.post('/', async (request, response) => {
 
   await Sessions.create({ userId: user.id, sessionId: token })
 
-  response.status(200).send({ token, username: user.username })
+  res.status(200).send({ token, username: user.username })
 })
 
 module.exports = router
