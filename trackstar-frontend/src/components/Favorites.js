@@ -12,8 +12,8 @@ const Favorites = () => {
   const [visible, setVisible] = useState(20)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
-  const user = useSelector((state) => state.user)
-  const favorites = useSelector((state) => state.favorites)
+  const user = useSelector(state => state.user)
+  const favorites = useSelector(state => state.favorites)
   // const [sortBy, setSortBy] = useState(null)
   // const [sortOrder, setSortOrder] = useState('ASC')
 
@@ -29,18 +29,23 @@ const Favorites = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(favorites)
-        if (favorites.length > 0) {
+        const favoriteTickers = favorites.map(favorite => favorite.ticker)
+        console.log(favoriteTickers, 'favoriteTickers')
+        const coinListResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list')
+        const coinList=coinListResponse.data
+        console.log(coinList, 'coinList')
+        const favoriteIds = coinList.filter(coin => favoriteTickers.includes(coin.symbol.toUpperCase()))
+          .map(coin => coin.id)
+        if (favoriteIds.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
             {
               params: {
                 vs_currency: 'usd',
-                ids: favorites.join(','),
+                ids: favoriteIds.join(','),
               },
             },
           )
-          console.log(marketDataResponse.data, 'mdata')
 
           setCryptos(marketDataResponse.data)
         }
@@ -50,7 +55,7 @@ const Favorites = () => {
     }
 
     fetchData()
-  }, [])
+  }, [favorites])
 
   const openModal = (crypto) => {
     setIsOpen(true)
@@ -165,10 +170,10 @@ const Favorites = () => {
 
   return (
     <div className="MarketsContainer">
-      <table>
+      <table className="marketsTable">
         <thead>
           <tr id="marketsHeader">
-            <th /*onClick={() => handleSort('ticker')}*/>Ticker</th>
+            <th colSpan="2">Ticker</th>
             <th>Price</th>
             <th>Market Cap</th>
             <th>Volume</th>
@@ -179,7 +184,8 @@ const Favorites = () => {
         </thead>
         <tbody>
           {cryptos.slice(0, visible).map((crypto) => (
-            <tr key={crypto.id}>
+            <tr key={crypto.id} className="cryptoRow">
+              <td><img src={crypto.image} alt="Logo" width="20px"></img></td>
               <td>{crypto.symbol.toUpperCase()}</td>
               <td>${crypto.current_price.toLocaleString()}</td>
               <td>${crypto.market_cap.toLocaleString()}</td>

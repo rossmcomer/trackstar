@@ -32,6 +32,7 @@ const Markets = () => {
           'https://api.coingecko.com/api/v3/search/trending',
         )
         const trendingCoins = result.data.coins.map((coin) => coin.item.id)
+        console.log(trendingCoins, 'trendingCoins')
         if (trendingCoins.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
@@ -167,7 +168,7 @@ const Markets = () => {
 
   return (
     <div className="MarketsContainer">
-      <table id="marketsTable">
+      <table className="marketsTable">
         <thead>
           <tr id="marketsHeader">
             <th colSpan="2">Ticker</th>

@@ -14,7 +14,7 @@ const setToken = (token) => {
 }
 
 const getAll = async () => {
-  const request = await axios.get(baseUrl)
+  const request = await axios.get(baseUrl, { headers })
   return request.data
 }
 

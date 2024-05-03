@@ -1,4 +1,5 @@
 import favoriteService from '../services/favorites'
+import userService from '../services/user'
 
 const favoritesReducer = (state = [], action) => {
   switch (action.type) {
@@ -35,12 +36,14 @@ export const removeFavorite = (id) => {
 
 export const initializeFavorites = () => {
   return async (dispatch) => {
-    const favorites = await favoriteService.getAll()
-    console.log(favorites)
-    dispatch({
-      type: 'INIT_FAVORITES',
-      data: favorites,
-    })
+    const user = await userService.getUser()
+    if (user){
+      const favorites = await favoriteService.getAll()
+      dispatch({
+        type: 'INIT_FAVORITES',
+        data: favorites,
+      })
+    }
   }
 }
 
