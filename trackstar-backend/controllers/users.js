@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   try {
     const passwordHash = await bcryptjs.hash(req.body.password, 10)
     const user = await User.create({
-      username: req.body.username,
+      username: req.body.username.toLowerCase(),
       passwordHash: passwordHash,
     })
     res.json(user)
@@ -58,7 +58,7 @@ router.put('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id)
     if (user) {
-      user.username = req.body.username
+      user.username = req.body.username.toLowerCase()
       await user.save()
       res.json(user)
     } else {

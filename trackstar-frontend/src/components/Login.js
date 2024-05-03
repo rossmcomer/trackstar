@@ -19,7 +19,7 @@ const Login = () => {
     event.preventDefault()
     loginService
       .login({
-        username: username.fields.value,
+        username: username.fields.value.toLowerCase(),
         password: password.fields.value,
       })//logs in on the backend
       .then((user) => {
@@ -35,15 +35,15 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h2>Log in to Trackstar</h2>
+    <div id="loginContainer">
+      <h2 id="loginHeader">Log in</h2>
 
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} id="loginForm">
+        <div className="inputContainer">
           Username:
           <input {...username.fields} placeholder="example@domain.com" />
         </div>
-        <div>
+        <div className="inputContainer">
           Password:
           <input {...password.fields} placeholder="password"/>
         </div>

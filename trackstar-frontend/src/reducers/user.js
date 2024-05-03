@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import storageService from '../services/storage'
+import userService from '../services/user'
 import { notify } from './notification'
 
 const userSlice = createSlice({
@@ -15,14 +15,14 @@ export const { setUser, clearUser } = userSlice.actions
 
 export const initUser = () => {
   return async (dispatch) => {
-    const user = storageService.loadUser()
+    const user = userService.getUser()
     dispatch(setUser(user))
   }
 }
 
 export const logout = () => {
   return async (dispatch) => {
-    storageService.removeUser()
+    userService.clearUser()
     dispatch(clearUser())
     dispatch(notify('Logged out'))
   }

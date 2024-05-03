@@ -2,13 +2,7 @@ const { Sequelize } = require('sequelize')
 const { DATABASE_URL } = require('./config')
 const { Umzug, SequelizeStorage } = require('umzug')
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  logging: (msg) => {
-    if (msg.startsWith('Executing (default): SELECT * FROM')) {
-      console.log(msg)
-    }
-  },
-})
+const sequelize = new Sequelize(DATABASE_URL)
 
 const migrationConf = {
   migrations: {

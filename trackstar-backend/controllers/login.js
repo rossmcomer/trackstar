@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
 
   const user = await User.findOne({
     where: {
-      username: body.username,
+      username: body.username.toLowerCase(),
     },
   })
   // ADD MODAL TO CREATE ACCOUNT
