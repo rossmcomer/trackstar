@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import userService from '../services/user'
 import favoriteService from '../services/favorites'
+import logoutService from '../services/logout'
 import { notify } from './notification'
 
 const userSlice = createSlice({
@@ -23,10 +24,12 @@ export const initUser = () => {
 
 export const logout = () => {
   return async (dispatch) => {
-    userService.clearUser()
-    dispatch(clearUser())
-    favoriteService.setToken(null)
-    dispatch(notify('Logged out'))
+    let token = await userService.getToken()
+    logoutService.logout(token) //sends information to backend
+    userService.clearUser() //removes from localstorage and makes token=null
+    favoriteService.setToken(null) //sets favorite token = null
+    dispatch(clearUser()) // clears user state
+    dispatch(notify('Successfully logged out', 'success', 10))
   }
 }
 

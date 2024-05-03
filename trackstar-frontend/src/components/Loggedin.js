@@ -7,7 +7,7 @@ const Loggedin = () => {
     return
   }
 
-  return <em id="loggedInNotice">Logged in as {user.username}</em>
+  return <em id="loggedInNotice">Signed in as {user.username}</em>
 }
 
 export default Loggedin

@@ -12,7 +12,8 @@ const Favorites = () => {
   const [visible, setVisible] = useState(20)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
-  const favorites = useSelector((state) => state.favorite)
+  const user = useSelector((state) => state.user)
+  const favorites = useSelector((state) => state.favorites)
   // const [sortBy, setSortBy] = useState(null)
   // const [sortOrder, setSortOrder] = useState('ASC')
 
@@ -28,6 +29,7 @@ const Favorites = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(favorites)
         if (favorites.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
@@ -38,6 +40,7 @@ const Favorites = () => {
               },
             },
           )
+          console.log(marketDataResponse.data, 'mdata')
 
           setCryptos(marketDataResponse.data)
         }
@@ -69,7 +72,6 @@ const Favorites = () => {
         )
 
         const prices = result.data.prices
-        console.log(prices)
 
         let options = {
           series: [

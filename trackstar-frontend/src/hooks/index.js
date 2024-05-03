@@ -16,7 +16,7 @@ export const useInitialization = () => {
   const dispatch = useDispatch()
 
   return () => {
-    //dispatch(initializeFavorites())
+    dispatch(initializeFavorites())
     dispatch(initUser())
   }
 }

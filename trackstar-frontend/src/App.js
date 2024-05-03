@@ -35,7 +35,6 @@ function App() {
   // const navigate = useNavigate()
   const stateInitializer = useInitialization()
   // const clearUser = useClearUser()
-  // const favorites = useSelector(state => state.favorites)
 
   useEffect(() => {
     stateInitializer()

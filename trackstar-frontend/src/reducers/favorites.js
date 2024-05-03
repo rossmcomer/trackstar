@@ -13,9 +13,9 @@ const favoritesReducer = (state = [], action) => {
   }
 }
 
-export const createFavorite = (id) => {
+export const createFavorite = (object) => {
   return async (dispatch) => {
-    const newFavorite = await favoriteService.create(id)
+    const newFavorite = await favoriteService.create(object)
     dispatch({
       type: 'NEW_FAVORITE',
       data: newFavorite,
@@ -36,6 +36,7 @@ export const removeFavorite = (id) => {
 export const initializeFavorites = () => {
   return async (dispatch) => {
     const favorites = await favoriteService.getAll()
+    console.log(favorites)
     dispatch({
       type: 'INIT_FAVORITES',
       data: favorites,
