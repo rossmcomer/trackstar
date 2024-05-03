@@ -26,41 +26,20 @@ import Header from './components/Header'
 import Markets from './components/Markets'
 import Favorites from './components/Favorites'
 import Login from './components/Login'
+import Loggedin from './components/Loggedin'
+import Logout from './components/Logout'
 import Notification from './components/Notification'
 
 function App() {
   // const dispatch = useDispatch()
   // const navigate = useNavigate()
   const stateInitializer = useInitialization()
-  // const notifyWith = useNotification()
   // const clearUser = useClearUser()
   // const favorites = useSelector(state => state.favorites)
-  //const user = useSelector(state => state.user)
-  const user = null
 
   useEffect(() => {
     stateInitializer()
-    console.log(user)
   }, [])
-
-  // const handleLogin = async (username, password) => {
-  //   try {
-  //     const user = await loginService.login({ username, password })
-  //     userService.setUser(user)
-  //     favoriteService.setToken(user.token)
-  //     dispatch(setUser(user))
-  //     navigate('/')
-  //     notifyWith(`Successfully logged in as ${user}.`)
-  //   } catch (e) {
-  //     notifyWith('Wrong username or password', 'error')
-  //   }
-  // }
-
-  // const handleLogout = () => {
-  //   clearUser()
-  //   navigate('/')
-  //   notifyWith('User successfully logged out')
-  // }
 
   // const handleAddFavorite = async (newFavorite) => {
   //   try {
@@ -75,7 +54,8 @@ function App() {
     <Router>
       <div className="App">
         <div>
-          <Header user={user} />
+          <Header/>
+          <Loggedin/>
           <Notification />
         </div>
         <Routes>
@@ -85,6 +65,7 @@ function App() {
           <Route path="/sentiment" element={<Markets />} />
           <Route path="/contact" element={<Markets />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>
     </Router>

@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux'
-import { setUser } from '../reducers/user'
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 
 import loginService from '../services/login'
 import userService from '../services/user'
 import favoriteService from '../services/favorites'
+
 import { notify } from '../reducers/notification'
+import { setUser } from '../reducers/user'
 
 const Login = () => {
   const username = useField('text')

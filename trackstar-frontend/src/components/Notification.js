@@ -16,7 +16,6 @@ const Notification = () => {
     padding: 10,
     marginBottom: 10,
   }
-  console.log(notification)
 
   return <div style={style}>{notification.message}</div>
 }

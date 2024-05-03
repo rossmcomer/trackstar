@@ -66,6 +66,14 @@ body {
 
 /*end header section*/
 
+#loggedInNotice {
+  color: white;
+  margin: 10px 15px;
+  display:flex;
+  flex-shrink: none;
+  min-width: 240px;
+}
+
 /*login section*/
 
 #loginContainer {
