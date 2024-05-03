@@ -1,35 +1,20 @@
 let token = null
 
-const STORAGE_KEY = 'loggedTrackstarUser'
+const STORAGE_KEY = 'TrackstarUser'
 
 const setUser = (user) => {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
-  token = user.token
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
 }
 
 const getUser = () => {
-  const loggedUserJSON = window.localStorage.getItem(STORAGE_KEY)
-  if (loggedUserJSON) {
-    const user = JSON.parse(loggedUserJSON)
-    token = user.token
-    return user
-  }
-
-  return null
+  return JSON.parse(localStorage.getItem(STORAGE_KEY))
 }
 
 const clearUser = () => {
-    window.localStorage.removeItem(STORAGE_KEY)
-    token = null
+  localStorage.removeItem(STORAGE_KEY)
+  token = null
 }
 
 const getToken = () => token
 
-const authService = {
-    setUser,
-    getUser,
-    clearUser,
-    getToken,
-  }
-  
-export default authService
+export default { setUser, getUser, clearUser, getToken }

@@ -6,13 +6,13 @@ import ApexCharts from 'apexcharts'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
 
-const Markets = () => {
+const Favorites = () => {
+  const dispatch = useDispatch()
   const [cryptos, setCryptos] = useState([])
-  const [watchlist, setWatchlist] = useState([])
   const [visible, setVisible] = useState(20)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
-  // const dispatch = useDispatch()
+  const favorites = useSelector((state) => state.favorite)
   // const [sortBy, setSortBy] = useState(null)
   // const [sortOrder, setSortOrder] = useState('ASC')
 
@@ -28,17 +28,13 @@ const Markets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(
-          'https://api.coingecko.com/api/v3/search/trending',
-        )
-        const trendingCoins = result.data.coins.map((coin) => coin.item.id)
-        if (trendingCoins.length > 0) {
+        if (favorites.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
             {
               params: {
                 vs_currency: 'usd',
-                ids: trendingCoins.join(','),
+                ids: favorites.join(','),
               },
             },
           )
@@ -153,11 +149,11 @@ const Markets = () => {
     fetchModalData()
   }, [modalIsOpen, selectedCrypto])
 
-  const addToWatchlist = (id) => {
-    if (!watchlist.includes(id)) {
-      setWatchlist([...watchlist, id])
+  const addToFavorites = (id) => {
+    if (!favorites.includes(id)) {
+      dispatch(createFavorite(id))
     } else {
-      setWatchlist(watchlist.filter((item) => item !== id))
+      dispatch(removeFavorite(id))
     }
   }
 
@@ -167,10 +163,10 @@ const Markets = () => {
 
   return (
     <div className="MarketsContainer">
-      <table id="marketsTable">
+      <table>
         <thead>
           <tr id="marketsHeader">
-            <th colSpan="2">Ticker</th>
+            <th /*onClick={() => handleSort('ticker')}*/>Ticker</th>
             <th>Price</th>
             <th>Market Cap</th>
             <th>Volume</th>
@@ -181,16 +177,15 @@ const Markets = () => {
         </thead>
         <tbody>
           {cryptos.slice(0, visible).map((crypto) => (
-            <tr key={crypto.id} className="cryptoRow">
-              <td><img src={crypto.image} alt="Logo" width="20px"></img></td>
+            <tr key={crypto.id}>
               <td>{crypto.symbol.toUpperCase()}</td>
               <td>${crypto.current_price.toLocaleString()}</td>
               <td>${crypto.market_cap.toLocaleString()}</td>
               <td>${crypto.total_volume.toLocaleString()}</td>
               <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
               <td>
-                <button id="favBtn" onClick={() => addToWatchlist(crypto.id)}>
-                  {watchlist.includes(crypto.id) ? '★' : '☆'}
+                <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
+                  {favorites.includes(crypto.id) ? '★' : '☆'}
                 </button>
               </td>
               <td>
@@ -225,4 +220,4 @@ const Markets = () => {
   )
 }
 
-export default Markets
+export default Favorites

@@ -1,5 +1,5 @@
-@import '~bootstrap/dist/css/bootstrap.css';
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 body {
   font-family: "Roboto", sans-serif;
@@ -12,7 +12,12 @@ body {
 .App {
   position: relative;
   background-color: #020230;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -65,6 +70,9 @@ body {
 .MarketsContainer {
   text-align: center;
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #marketsHeader th:not(:last-child) {
@@ -78,16 +86,17 @@ table {
   -webkit-backdrop-filter: blur(3px) saturate(131%);
   background-color: rgba(17, 25, 40, 0.59);
   border: 1px solid rgba(255, 255, 255, 0.125);
-  width: [object Object]px; 
-	height: [object Object]px; 
-	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
-	-webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
-	-moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
+  width: [object Object]px;
+  height: [object Object]px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
 }
 
-th, td {
+th,
+td {
   border: 1px solid #fcdf3e;
-  padding: .3rem;
+  padding: 0.3rem;
   text-align: left;
 }
 
@@ -108,17 +117,17 @@ td {
   background-color: transparent;
   cursor: pointer;
   font-size: 15px;
-  color:#ffffff;
+  color: #ffffff;
   transform-origin: center top;
 }
 
 #viewChartBtn:hover {
-  color:#020230;
+  color: #020230;
   transform: scale(1.2);
 }
 
 #favBtn {
-  color:#fcdf3e;
+  color: #fcdf3e;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -144,7 +153,7 @@ td {
 }
 
 #chartBtnContainer {
-  display:flex;
+  display: flex;
   justify-content: right;
 }
 
