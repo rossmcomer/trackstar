@@ -13,24 +13,24 @@ const Login = () => {
   const password = useField('password')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const navigate = useNavigate()
     loginService
       .login({
         username: username.fields.value,
         password: password.fields.value,
-      })
+      })//logs in on the backend
       .then((user) => {
-        userService.setUser(user)
-        favoriteService.setToken(user.token)
-        dispatch(setUser(user))
+        userService.setUser(user) //sets localstorage STORAGE_KEY
+        favoriteService.setToken(user.token) //sets headers.Authorization token
+        dispatch(setUser(user)) //sets state of User
         navigate('/')
-        dispatch(notify(`Signed in as ${user.username}`))
+        dispatch(notify(`Signed in as ${user.username}`, 'success', 10))
       })
       .catch(() => {
-        notify('Wrong username or password', 'error')
+        dispatch(notify('Wrong username or password', 'error', 10))
       })
   }
 
@@ -41,11 +41,11 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <div>
           Username:
-          <input {...username.fields} />
+          <input {...username.fields} placeholder="example@domain.com" />
         </div>
         <div>
           Password:
-          <input {...password.fields} />
+          <input {...password.fields} placeholder="password"/>
         </div>
         <button id="login-button" type="submit">
           Login
