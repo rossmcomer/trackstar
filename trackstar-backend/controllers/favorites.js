@@ -13,7 +13,7 @@ router.get('/', tokenExtractor, async (req, res) => {
     try {
       const favorites = await Favorite.findAll({
         where: { favoritesListId: favoritesList.id },
-        order: [['ticker', 'ASC']],
+        order: [['coingecko_id', 'ASC']],
         attributes: { exclude: ['favoritesListId', 'id'] },
       })
 

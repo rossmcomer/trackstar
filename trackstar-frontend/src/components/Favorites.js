@@ -12,7 +12,6 @@ const Favorites = () => {
   const [visible, setVisible] = useState(20)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
-  const user = useSelector(state => state.user)
   const favorites = useSelector(state => state.favorites)
   // const [sortBy, setSortBy] = useState(null)
   // const [sortOrder, setSortOrder] = useState('ASC')
@@ -55,7 +54,7 @@ const Favorites = () => {
     }
 
     fetchData()
-  }, [favorites])
+  }, [])
 
   const openModal = (crypto) => {
     setIsOpen(true)

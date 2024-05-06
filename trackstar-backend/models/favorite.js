@@ -19,7 +19,7 @@ Favorite.init(
         key: 'id',
       },
     },
-    ticker: {
+    coingeckoId: {
       type: DataTypes.STRING(10),
       allowNull: false,
     },
