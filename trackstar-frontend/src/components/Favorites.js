@@ -28,20 +28,18 @@ const Favorites = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const favoriteTickers = favorites.map(favorite => favorite.ticker)
-        console.log(favoriteTickers, 'favoriteTickers')
+        const favoriteIds = favorites.map(favorite => favorite.coingeckoId)
         const coinListResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list')
         const coinList=coinListResponse.data
-        console.log(coinList, 'coinList')
-        const favoriteIds = coinList.filter(coin => favoriteTickers.includes(coin.symbol.toUpperCase()))
+        const favoritecoins = coinList.filter(coin => favoriteIds.includes(coin.id))
           .map(coin => coin.id)
-        if (favoriteIds.length > 0) {
+        if (favoritecoins.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
             {
               params: {
                 vs_currency: 'usd',
-                ids: favoriteIds.join(','),
+                ids: favoritecoins.join(','),
               },
             },
           )
@@ -156,7 +154,7 @@ const Favorites = () => {
   }, [modalIsOpen, selectedCrypto])
 
   const addToFavorites = (id) => {
-    if (!favorites.includes(id)) {
+    if (!favorites.map(fav => fav.coingeckoId).includes(id)) {
       dispatch(createFavorite(id))
     } else {
       dispatch(removeFavorite(id))
@@ -192,7 +190,7 @@ const Favorites = () => {
               <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
               <td>
                 <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
-                  {favorites.includes(crypto.id) ? '★' : '☆'}
+                  {favorites.map(fav => fav.coingeckoId).includes(crypto.id) ? '★' : '☆'}
                 </button>
               </td>
               <td>

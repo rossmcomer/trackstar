@@ -6,7 +6,7 @@ const favoritesReducer = (state = [], action) => {
   case 'NEW_FAVORITE':
     return [...state, action.data]
   case 'REMOVE':
-    return state.filter((b) => b.id !== action.data)
+    return state.filter((f) => f.coingeckoId !== action.data)
   case 'INIT_FAVORITES':
     return action.data
   default:
@@ -14,9 +14,9 @@ const favoritesReducer = (state = [], action) => {
   }
 }
 
-export const createFavorite = (object) => {
+export const createFavorite = (id) => {
   return async (dispatch) => {
-    const newFavorite = await favoriteService.create(object)
+    const newFavorite = await favoriteService.create({ id })
     dispatch({
       type: 'NEW_FAVORITE',
       data: newFavorite,

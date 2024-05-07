@@ -25,11 +25,6 @@ const Header = () => {
                 </Link>
               </Nav.Link>
               <Nav.Link href="#" as="span" className="nav-item">
-                <Link to="/sentiment" className="nav-link">
-                Sentiment
-                </Link>
-              </Nav.Link>
-              <Nav.Link href="#" as="span" className="nav-item">
                 <Link to="/contact" className="nav-link">
                 Contact
                 </Link>

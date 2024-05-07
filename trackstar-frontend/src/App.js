@@ -61,7 +61,6 @@ function App() {
           <Route path="/" element={<Markets />} />
           <Route path="/markets" element={<Markets />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route path="/sentiment" element={<Markets />} />
           <Route path="/contact" element={<Markets />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />

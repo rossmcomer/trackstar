@@ -47,30 +47,30 @@ router.post('/', tokenExtractor, async (req, res) => {
           userId: req.decodedToken.id,
         })
       }
-
+      
       const favorite = await Favorite.create({
-        ...req.body,
+        coingeckoId: req.body.id,
         favoritesListId: favoritesList.id,
       })
       return res.json(favorite)
     } catch (error) {
-      res.status(400).json({ error: 'Failed to add ticker as favorite' })
+      res.status(400).json({ error: 'Failed to add coin as favorite' })
     }
   } else {
     return res.status(404).json({ error: 'User or session not found' })
   }
 })
 
-const favoriteFinder = async (req, res, next) => {
-  req.favorite = await Favorite.findByPk(req.params.id)
-  next()
-}
-
-router.delete('/:id', favoriteFinder, tokenExtractor, async (req, res) => {
+router.delete('/:id', tokenExtractor, async (req, res) => {
   try {
     const user = await User.findByPk(req.decodedToken.id)
     const favoritesList = await FavoritesList.findOne({
       where: { userId: req.decodedToken.id },
+    })
+    const favorite = await Favorite.findOne({
+      where: { 
+        favoritesListId: favoritesList.id,
+        coingeckoId: req.params.id }
     })
     const session = await Sessions.findOne({
       where: {
@@ -79,14 +79,14 @@ router.delete('/:id', favoriteFinder, tokenExtractor, async (req, res) => {
       },
     })
 
-    if (user && session && favoritesList) {
-      if (req.favorite && req.favorite.favoritesListId === favoritesList.id) {
-        await req.favorite.destroy()
+    if (user && session) {
+      if (favorite) {
+        await favorite.destroy()
         res.status(200).json({ message: 'Favorite successfully removed' })
       } else {
         res
           .status(403)
-          .json({ error: 'You do not have permssion to delete this.' })
+          .json({ error: 'Favorite does not exist' })
       }
     } else {
       return res.status(404).json({ error: 'User or session not found' })

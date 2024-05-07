@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
 
 const Markets = () => {
+  const dispatch = useDispatch()
   const [cryptos, setCryptos] = useState([])
-  const [watchlist, setWatchlist] = useState([])
   const [visible, setVisible] = useState(20)
+  const favorites = useSelector(state => state.favorites)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
   // const dispatch = useDispatch()
@@ -32,7 +33,6 @@ const Markets = () => {
           'https://api.coingecko.com/api/v3/search/trending',
         )
         const trendingCoins = result.data.coins.map((coin) => coin.item.id)
-        console.log(trendingCoins, 'trendingCoins')
         if (trendingCoins.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
@@ -74,7 +74,6 @@ const Markets = () => {
         )
 
         const prices = result.data.prices
-        console.log(prices)
 
         let options = {
           series: [
@@ -154,11 +153,11 @@ const Markets = () => {
     fetchModalData()
   }, [modalIsOpen, selectedCrypto])
 
-  const addToWatchlist = (id) => {
-    if (!watchlist.includes(id)) {
-      setWatchlist([...watchlist, id])
+  const addToFavorites = (id) => {
+    if (!favorites.map(fav => fav.coingeckoId).includes(id)) {
+      dispatch(createFavorite(id))
     } else {
-      setWatchlist(watchlist.filter((item) => item !== id))
+      dispatch(removeFavorite(id)) //this id need to be id in favorites table
     }
   }
 
@@ -190,8 +189,8 @@ const Markets = () => {
               <td>${crypto.total_volume.toLocaleString()}</td>
               <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
               <td>
-                <button id="favBtn" onClick={() => addToWatchlist(crypto.id)}>
-                  {watchlist.includes(crypto.id) ? '★' : '☆'}
+                <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
+                  {favorites.map(fav => fav.coingeckoId).includes(crypto.id) ? '★' : '☆'}
                 </button>
               </td>
               <td>
