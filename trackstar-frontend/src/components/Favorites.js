@@ -12,7 +12,7 @@ const Favorites = () => {
   const [visible, setVisible] = useState(20)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
-  const favorites = useSelector(state => state.favorites)
+  const favorites = useSelector((state) => state.favorites)
   // const [sortBy, setSortBy] = useState(null)
   // const [sortOrder, setSortOrder] = useState('ASC')
 
@@ -28,11 +28,14 @@ const Favorites = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const favoriteIds = favorites.map(favorite => favorite.coingeckoId)
-        const coinListResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list')
-        const coinList=coinListResponse.data
-        const favoritecoins = coinList.filter(coin => favoriteIds.includes(coin.id))
-          .map(coin => coin.id)
+        const favoriteIds = favorites.map((favorite) => favorite.coingeckoId)
+        const coinListResponse = await axios.get(
+          'https://api.coingecko.com/api/v3/coins/list',
+        )
+        const coinList = coinListResponse.data
+        const favoritecoins = coinList
+          .filter((coin) => favoriteIds.includes(coin.id))
+          .map((coin) => coin.id)
         if (favoritecoins.length > 0) {
           const marketDataResponse = await axios.get(
             'https://api.coingecko.com/api/v3/coins/markets',
@@ -154,7 +157,7 @@ const Favorites = () => {
   }, [modalIsOpen, selectedCrypto])
 
   const addToFavorites = (id) => {
-    if (!favorites.map(fav => fav.coingeckoId).includes(id)) {
+    if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
       dispatch(createFavorite(id))
     } else {
       dispatch(removeFavorite(id))
@@ -182,7 +185,9 @@ const Favorites = () => {
         <tbody>
           {cryptos.slice(0, visible).map((crypto) => (
             <tr key={crypto.id} className="cryptoRow">
-              <td><img src={crypto.image} alt="Logo" width="20px"></img></td>
+              <td>
+                <img src={crypto.image} alt="Logo" width="20px"></img>
+              </td>
               <td>{crypto.symbol.toUpperCase()}</td>
               <td>${crypto.current_price.toLocaleString()}</td>
               <td>${crypto.market_cap.toLocaleString()}</td>
@@ -190,7 +195,9 @@ const Favorites = () => {
               <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
               <td>
                 <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
-                  {favorites.map(fav => fav.coingeckoId).includes(crypto.id) ? '★' : '☆'}
+                  {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
+                    ? '★'
+                    : '☆'}
                 </button>
               </td>
               <td>

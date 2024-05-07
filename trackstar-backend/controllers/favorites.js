@@ -47,7 +47,7 @@ router.post('/', tokenExtractor, async (req, res) => {
           userId: req.decodedToken.id,
         })
       }
-      
+
       const favorite = await Favorite.create({
         coingeckoId: req.body.id,
         favoritesListId: favoritesList.id,
@@ -68,9 +68,10 @@ router.delete('/:id', tokenExtractor, async (req, res) => {
       where: { userId: req.decodedToken.id },
     })
     const favorite = await Favorite.findOne({
-      where: { 
+      where: {
         favoritesListId: favoritesList.id,
-        coingeckoId: req.params.id }
+        coingeckoId: req.params.id,
+      },
     })
     const session = await Sessions.findOne({
       where: {
@@ -84,9 +85,7 @@ router.delete('/:id', tokenExtractor, async (req, res) => {
         await favorite.destroy()
         res.status(200).json({ message: 'Favorite successfully removed' })
       } else {
-        res
-          .status(403)
-          .json({ error: 'Favorite does not exist' })
+        res.status(403).json({ error: 'Favorite does not exist' })
       }
     } else {
       return res.status(404).json({ error: 'User or session not found' })

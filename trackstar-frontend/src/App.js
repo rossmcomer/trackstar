@@ -53,8 +53,8 @@ function App() {
     <Router>
       <div className="App">
         <div>
-          <Header/>
-          <Loggedin/>
+          <Header />
+          <Loggedin />
           <Notification />
         </div>
         <Routes>

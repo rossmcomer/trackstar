@@ -3,40 +3,40 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
   return (
     <header>
       <div id="headerDiv">
         <Navbar collapseOnSelect expand="lg" variant="light" className="navBar">
           <Navbar.Brand as={Link} to="/" className="navBrand">
-          TRACKSTAR
+            TRACKSTAR
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
               <Nav.Link href="#" as="span" className="nav-item">
                 <Link to="/markets" className="nav-link">
-                Markets
+                  Markets
                 </Link>
               </Nav.Link>
               <Nav.Link href="#" as="span" className="nav-item">
                 <Link to="/favorites" className="nav-link">
-                Favorites
+                  Favorites
                 </Link>
               </Nav.Link>
               <Nav.Link href="#" as="span" className="nav-item">
                 <Link to="/contact" className="nav-link">
-                Contact
+                  Contact
                 </Link>
               </Nav.Link>
               <Nav.Link href="#" as="span">
                 {user ? (
                   <Link to="/logout" className="nav-link">
-                  logout
+                    logout
                   </Link>
                 ) : (
                   <Link to="/login" className="nav-link">
-                  login
+                    login
                   </Link>
                 )}
               </Nav.Link>

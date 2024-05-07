@@ -10,7 +10,7 @@ const Markets = () => {
   const dispatch = useDispatch()
   const [cryptos, setCryptos] = useState([])
   const [visible, setVisible] = useState(20)
-  const favorites = useSelector(state => state.favorites)
+  const favorites = useSelector((state) => state.favorites)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
   // const dispatch = useDispatch()
@@ -154,7 +154,7 @@ const Markets = () => {
   }, [modalIsOpen, selectedCrypto])
 
   const addToFavorites = (id) => {
-    if (!favorites.map(fav => fav.coingeckoId).includes(id)) {
+    if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
       dispatch(createFavorite(id))
     } else {
       dispatch(removeFavorite(id)) //this id need to be id in favorites table
@@ -182,7 +182,9 @@ const Markets = () => {
         <tbody>
           {cryptos.slice(0, visible).map((crypto) => (
             <tr key={crypto.id} className="cryptoRow">
-              <td><img src={crypto.image} alt="Logo" width="20px"></img></td>
+              <td>
+                <img src={crypto.image} alt="Logo" width="20px"></img>
+              </td>
               <td>{crypto.symbol.toUpperCase()}</td>
               <td>${crypto.current_price.toLocaleString()}</td>
               <td>${crypto.market_cap.toLocaleString()}</td>
@@ -190,7 +192,9 @@ const Markets = () => {
               <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
               <td>
                 <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
-                  {favorites.map(fav => fav.coingeckoId).includes(crypto.id) ? '★' : '☆'}
+                  {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
+                    ? '★'
+                    : '☆'}
                 </button>
               </td>
               <td>

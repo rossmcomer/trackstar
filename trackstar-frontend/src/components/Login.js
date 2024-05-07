@@ -22,7 +22,7 @@ const Login = () => {
       .login({
         username: username.fields.value.toLowerCase(),
         password: password.fields.value,
-      })//logs in on the backend
+      }) //logs in on the backend
       .then((user) => {
         userService.setUser(user) //sets localstorage STORAGE_KEY
         favoriteService.setToken(user.token) //sets headers.Authorization token
@@ -46,7 +46,7 @@ const Login = () => {
         </div>
         <div className="inputContainer">
           Password:
-          <input {...password.fields} placeholder="password"/>
+          <input {...password.fields} placeholder="password" />
         </div>
         <button id="login-button" type="submit">
           Login
