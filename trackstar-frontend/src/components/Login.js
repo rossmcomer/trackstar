@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,11 +12,25 @@ import { setUser } from '../reducers/user'
 const Login = () => {
   const username = useField('text')
   const password = useField('password')
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector((state) => state.user)
 
-  const handleSubmit = (event) => {
+  const handleLogout = () => {
+    navigate('/logout')
+  }
+
+  if (user) {
+    return (
+      <div id="logoutContainer">
+        <button onClick={handleLogout} id="logout-button">
+          Logout
+        </button>
+      </div>
+    )
+  }
+
+  const handleLogin = (event) => {
     event.preventDefault()
     loginService
       .login({
@@ -36,10 +50,10 @@ const Login = () => {
   }
 
   return (
-    <div id="loginContainer">
-      <h2 id="loginHeader">Log in</h2>
+    <div className="loginContainer">
+      <h2 className="loginHeader">Log in</h2>
 
-      <form onSubmit={handleSubmit} id="loginForm">
+      <form onSubmit={handleLogin} className="loginForm">
         <div className="inputContainer">
           Username:
           <input {...username.fields} placeholder="example@domain.com" />
@@ -48,7 +62,7 @@ const Login = () => {
           Password:
           <input {...password.fields} placeholder="password" />
         </div>
-        <button id="login-button" type="submit">
+        <button className="login-button" type="submit">
           Login
         </button>
       </form>

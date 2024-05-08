@@ -9,22 +9,10 @@ import { createFavorite, removeFavorite } from '../reducers/favorites'
 const Markets = () => {
   const dispatch = useDispatch()
   const [cryptos, setCryptos] = useState([])
-  const [visible, setVisible] = useState(20)
+  const [visible, setVisible] = useState(10)
   const favorites = useSelector((state) => state.favorites)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
-  // const dispatch = useDispatch()
-  // const [sortBy, setSortBy] = useState(null)
-  // const [sortOrder, setSortOrder] = useState('ASC')
-
-  // const handleSort = (columnName) => {
-  //   if (sortBy === columnName) {
-  //     setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC')
-  //   } else {
-  //     setSortBy(columnName)
-  //     setSortOrder('ASC')
-  //   }
-  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,7 +145,7 @@ const Markets = () => {
     if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
       dispatch(createFavorite(id))
     } else {
-      dispatch(removeFavorite(id)) //this id need to be id in favorites table
+      dispatch(removeFavorite(id))
     }
   }
 
@@ -167,64 +155,66 @@ const Markets = () => {
 
   return (
     <div className="MarketsContainer">
-      <table className="marketsTable">
-        <thead>
-          <tr id="marketsHeader">
-            <th colSpan="2">Ticker</th>
-            <th>Price</th>
-            <th>Market Cap</th>
-            <th>Volume</th>
-            <th>24hr Change%</th>
-            <th>Favorite</th>
-            <th>View Chart</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cryptos.slice(0, visible).map((crypto) => (
-            <tr key={crypto.id} className="cryptoRow">
-              <td>
-                <img src={crypto.image} alt="Logo" width="20px"></img>
-              </td>
-              <td>{crypto.symbol.toUpperCase()}</td>
-              <td>${crypto.current_price.toLocaleString()}</td>
-              <td>${crypto.market_cap.toLocaleString()}</td>
-              <td>${crypto.total_volume.toLocaleString()}</td>
-              <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
-              <td>
-                <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
-                  {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
-                    ? '★'
-                    : '☆'}
-                </button>
-              </td>
-              <td>
-                <button onClick={() => openModal(crypto)} id="viewChartBtn">
-                  View
-                </button>
-              </td>
+      <div className="TableContainer">
+        <table className="marketsTable">
+          <thead>
+            <tr id="marketsHeader">
+              <th colSpan="2">Ticker</th>
+              <th>Price</th>
+              <th>24hr Change%</th>
+              <th>Favorite</th>
+              <th>View Chart</th>
+              <th>Market Cap</th>
+              <th>Volume</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {cryptos.slice(0, visible).map((crypto) => (
+              <tr key={crypto.id} className="cryptoRow">
+                <td>
+                  <img src={crypto.image} alt="Logo" width="20px"></img>
+                </td>
+                <td>{crypto.symbol.toUpperCase()}</td>
+                <td>${crypto.current_price}</td>
+                <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
+                <td>
+                  <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
+                    {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
+                      ? '★'
+                      : '☆'}
+                  </button>
+                </td>
+                <td>
+                  <button onClick={() => openModal(crypto)} id="viewChartBtn">
+                    View
+                  </button>
+                </td>
+                <td>${crypto.market_cap.toLocaleString()}</td>
+                <td>${crypto.total_volume.toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Crypto Chart"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <div id="cryptoChart"></div>
+          <div id="chartBtnContainer">
+            <button onClick={closeModal} id="chartBtn">
+              Close
+            </button>
+          </div>
+        </Modal>
+      </div>
       {visible < cryptos.length && (
-        <button onClick={loadMore} className="load-more">
+        <button onClick={loadMore} className="load-more-button">
           Load More
         </button>
       )}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Crypto Chart"
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <div id="cryptoChart"></div>
-        <div id="chartBtnContainer">
-          <button onClick={closeModal} id="chartBtn">
-            Close
-          </button>
-        </div>
-      </Modal>
     </div>
   )
 }

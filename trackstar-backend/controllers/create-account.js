@@ -3,12 +3,17 @@ const bcryptjs = require('bcryptjs')
 const { User } = require('../models')
 
 router.post('/', async (req, res) => {
-  const body = req.body
   if (req.body.password === req.body.confirm) {
     try {
+      const existingUser = await User.findOne({
+        where: { username: req.body.username },
+      })
+      if (existingUser) {
+        return res.status(409).json({ error: 'Username already exists' })
+      }
       const newUser = await User.create({
-        username: body.username,
-        passwordHash: await bcryptjs.hash(body.password, 10),
+        username: req.body.username,
+        passwordHash: await bcryptjs.hash(req.body.password, 10),
       })
 
       res

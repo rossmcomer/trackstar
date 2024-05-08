@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header>
       <div id="headerDiv">
-        <Navbar collapseOnSelect expand="lg" variant="light" className="navBar">
+        <Navbar collapseOnSelect expand="lg" variant="dark" className="navBar">
           <Navbar.Brand as={Link} to="/" className="navBrand">
             TRACKSTAR
           </Navbar.Brand>
@@ -22,11 +22,6 @@ const Header = () => {
               <Nav.Link href="#" as="span" className="nav-item">
                 <Link to="/favorites" className="nav-link">
                   Favorites
-                </Link>
-              </Nav.Link>
-              <Nav.Link href="#" as="span" className="nav-item">
-                <Link to="/contact" className="nav-link">
-                  Contact
                 </Link>
               </Nav.Link>
               <Nav.Link href="#" as="span">
