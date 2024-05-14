@@ -11,7 +11,7 @@ import Login from './components/Login'
 import Loggedin from './components/Loggedin'
 import Logout from './components/Logout'
 import CreateAccount from './components/CreateAccount'
-import Notification from './components/Notification'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const stateInitializer = useInitialization()
@@ -24,7 +24,7 @@ function App() {
     <Router>
       <div className="App">
         <div>
-          <Notification />
+          <Toaster />
           <Header />
           <Loggedin />
         </div>

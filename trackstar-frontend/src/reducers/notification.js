@@ -17,10 +17,10 @@ const slice = createSlice({
 export const notify = (message, type, duration) => {
   return async (dispatch) => {
     dispatch(setNotif({ message, type }))
+    toast(message)
     setTimeout(() => {
       dispatch(clearNotif())
     }, duration * 1000)
-    toast(message)
   }
 }
 
