@@ -150,10 +150,10 @@ const Favorites = () => {
   const addToFavorites = (id) => {
     if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
       dispatch(createFavorite(id))
-      dispatch(notify('added to Favorites', 'success', 10))
+      dispatch(notify(`${id} added to Favorites`, 'success', 10))
     } else {
       dispatch(removeFavorite(id))
-      dispatch(notify('removed from Favorites', 'success', 10))
+      dispatch(notify(`${id} removed from Favorites`, 'success', 10))
     }
   }
 

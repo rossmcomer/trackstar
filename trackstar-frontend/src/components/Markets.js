@@ -5,12 +5,14 @@ import Modal from 'react-modal'
 import ApexCharts from 'apexcharts'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
+import { notify } from '../reducers/notification'
 
 const Markets = () => {
   const dispatch = useDispatch()
   const [cryptos, setCryptos] = useState([])
   const [visible, setVisible] = useState(10)
   const favorites = useSelector((state) => state.favorites)
+  const user = useSelector((state) => state.user)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
 
@@ -142,10 +144,16 @@ const Markets = () => {
   }, [modalIsOpen, selectedCrypto])
 
   const addToFavorites = (id) => {
-    if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
-      dispatch(createFavorite(id))
-    } else {
-      dispatch(removeFavorite(id))
+    if(user){
+      if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
+        dispatch(createFavorite(id))
+        dispatch(notify(`${id} added to Favorites`, 'success', 10))
+      } else {
+        dispatch(removeFavorite(id))
+        dispatch(notify(`${id} removed from Favorites`, 'success', 10))
+      }}
+    else {
+      dispatch(notify('Please log in to use this feature', 'error', 10))
     }
   }
 

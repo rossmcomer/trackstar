@@ -8,7 +8,7 @@ const Notification = () => {
   }
 
   const style = {
-    color: notification.type === 'error' ? 'yellow' : 'green',
+    color: notification.type === 'error' ? 'red' : 'green',
     fontSize: 14,
     margin: 10,
     minWidth: 240,

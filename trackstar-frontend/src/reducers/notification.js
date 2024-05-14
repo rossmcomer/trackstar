@@ -17,7 +17,11 @@ const slice = createSlice({
 export const notify = (message, type, duration) => {
   return async (dispatch) => {
     dispatch(setNotif({ message, type }))
-    toast(message)
+    if (type==='success'){
+      toast.success(message, { id: 'clipboard' })
+    } else if (type==='error'){
+      toast.error(message, { id: 'clipboard' })
+    }
     setTimeout(() => {
       dispatch(clearNotif())
     }, duration * 1000)
