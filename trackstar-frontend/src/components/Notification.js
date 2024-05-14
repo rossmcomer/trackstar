@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { Toaster } from 'react-hot-toast'
 
 const Notification = () => {
   const notification = useSelector((state) => state.notification)
@@ -7,14 +8,7 @@ const Notification = () => {
     return
   }
 
-  const style = {
-    color: notification.type === 'error' ? 'yellow' : 'green',
-    fontSize: 14,
-    margin: 10,
-    minWidth: 240,
-  }
-
-  return <div style={style}>{notification.message}</div>
+  return <Toaster />
 }
 
 export default Notification

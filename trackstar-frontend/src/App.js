@@ -24,9 +24,9 @@ function App() {
     <Router>
       <div className="App">
         <div>
+          <Notification />
           <Header />
           <Loggedin />
-          <Notification />
         </div>
         <Routes>
           <Route path="/" element={<Markets />} />

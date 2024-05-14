@@ -5,6 +5,7 @@ import Modal from 'react-modal'
 import ApexCharts from 'apexcharts'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
+import { notify } from '../reducers/notification'
 
 const Favorites = () => {
   const dispatch = useDispatch()
@@ -14,14 +15,6 @@ const Favorites = () => {
   const [selectedCrypto, setSelectedCrypto] = useState(null)
   const favorites = useSelector((state) => state.favorites)
   const user = useSelector((state) => state.user)
-
-  if (!user) {
-    return (
-      <div id="pleaseLoginContainer">
-        <div id="pleaseLoginNotice">Please log in to use this feature.</div>
-      </div>
-    )
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,8 +150,10 @@ const Favorites = () => {
   const addToFavorites = (id) => {
     if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
       dispatch(createFavorite(id))
+      dispatch(notify('added to Favorites', 'success', 10))
     } else {
       dispatch(removeFavorite(id))
+      dispatch(notify('removed from Favorites', 'success', 10))
     }
   }
 
@@ -168,66 +163,77 @@ const Favorites = () => {
 
   return (
     <div className="MarketsContainer">
-      <div className="TableContainer">
-        <table className="marketsTable">
-          <thead>
-            <tr id="marketsHeader">
-              <th colSpan="2">Ticker</th>
-              <th>Price</th>
-              <th>24hr Change%</th>
-              <th>Favorite</th>
-              <th>View Chart</th>
-              <th>Market Cap</th>
-              <th>Volume</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cryptos.slice(0, visible).map((crypto) => (
-              <tr key={crypto.id} className="cryptoRow">
-                <td>
-                  <img src={crypto.image} alt="Logo" width="20px"></img>
-                </td>
-                <td>{crypto.symbol.toUpperCase()}</td>
-                <td>${crypto.current_price.toLocaleString()}</td>
-                <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
-                <td>
-                  <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
-                    {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
-                      ? '★'
-                      : '☆'}
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => openModal(crypto)} id="viewChartBtn">
-                    View
-                  </button>
-                </td>
-                <td>${crypto.market_cap.toLocaleString()}</td>
-                <td>${crypto.total_volume.toLocaleString()}</td>
+      {user ? (
+        <div className="TableContainer">
+          <table className="marketsTable">
+            <thead>
+              <tr id="marketsHeader">
+                <th colSpan="2">Ticker</th>
+                <th>Price</th>
+                <th>24hr Change%</th>
+                <th>Favorite</th>
+                <th>View Chart</th>
+                <th>Market Cap</th>
+                <th>Volume</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        {visible < cryptos.length && (
-          <button onClick={loadMore} className="load-more-button">
-            Load More
-          </button>
-        )}
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel="Crypto Chart"
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <div id="cryptoChart"></div>
-          <div id="chartBtnContainer">
-            <button onClick={closeModal} id="chartBtn">
-              Close
+            </thead>
+            <tbody>
+              {cryptos.slice(0, visible).map((crypto) => (
+                <tr key={crypto.id} className="cryptoRow">
+                  <td>
+                    <img src={crypto.image} alt="Logo" width="20px"></img>
+                  </td>
+                  <td>{crypto.symbol.toUpperCase()}</td>
+                  <td>${crypto.current_price.toLocaleString()}</td>
+                  <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
+                  <td>
+                    <button
+                      id="favBtn"
+                      onClick={() => addToFavorites(crypto.id)}
+                    >
+                      {favorites
+                        .map((fav) => fav.coingeckoId)
+                        .includes(crypto.id)
+                        ? '★'
+                        : '☆'}
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => openModal(crypto)} id="viewChartBtn">
+                      View
+                    </button>
+                  </td>
+                  <td>${crypto.market_cap.toLocaleString()}</td>
+                  <td>${crypto.total_volume.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {visible < cryptos.length && (
+            <button onClick={loadMore} className="load-more-button">
+              Load More
             </button>
-          </div>
-        </Modal>
-      </div>
+          )}
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Crypto Chart"
+            className="Modal"
+            overlayClassName="Overlay"
+          >
+            <div id="cryptoChart"></div>
+            <div id="chartBtnContainer">
+              <button onClick={closeModal} id="chartBtn">
+                Close
+              </button>
+            </div>
+          </Modal>
+        </div>
+      ) : (
+        <div id="pleaseLoginContainer">
+          <div id="pleaseLoginNotice">Please log in to use this feature.</div>
+        </div>
+      )}
     </div>
   )
 }

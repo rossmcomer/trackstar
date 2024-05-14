@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-hot-toast'
 
 const initialState = { message: null }
 
@@ -19,6 +20,7 @@ export const notify = (message, type, duration) => {
     setTimeout(() => {
       dispatch(clearNotif())
     }, duration * 1000)
+    toast(message)
   }
 }
 

@@ -42,7 +42,7 @@ const Login = () => {
         favoriteService.setToken(user.token) //sets headers.Authorization token
         dispatch(setUser(user)) //sets state of User
         navigate('/')
-        dispatch(notify(`Signed in as ${user.username}`, 'success', 10))
+        dispatch(notify('Successfully logged in', 'success', 10))
       })
       .catch(() => {
         dispatch(notify('Wrong username or password', 'error', 10))
