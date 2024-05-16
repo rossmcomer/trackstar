@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   if (!user) {
     return res
       .status(403)
-      .json({ error: 'User not found. Would you like to create an account?' })
+      .json({ error: 'User not found.' })
   }
 
   const passwordCorrect = await bcryptjs.compare(
