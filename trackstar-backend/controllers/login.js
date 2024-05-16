@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
       username: body.username.toLowerCase(),
     },
   })
-  // ADD MODAL TO CREATE ACCOUNT
+  
   if (!user) {
     return res
       .status(403)
