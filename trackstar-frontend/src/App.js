@@ -1,6 +1,5 @@
 import './App.css'
 import React from 'react'
-require('dotenv').config()
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useInitialization } from './hooks'
