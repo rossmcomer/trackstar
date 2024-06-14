@@ -215,6 +215,18 @@ body {
   color: #fcdf3e;
 }
 
+#noFavoritesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 240px;
+  margin: 20px 15px;
+}
+
+#noFavorites {
+  color: #fcdf3e;
+}
+
 /*markets section*/
 .MarketsContainer {
   display: flex;

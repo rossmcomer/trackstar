@@ -161,6 +161,12 @@ const Favorites = () => {
     setVisible((prevValue) => prevValue + 20)
   }
 
+  if (favorites.length < 1) {
+    return <div id="noFavoritesContainer">
+      <div id="noFavorites">No favorites to display!  Add a favorite to get started!</div>
+    </div>
+  }
+
   return (
     <div className="MarketsContainer">
       {user ? (

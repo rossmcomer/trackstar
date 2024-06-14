@@ -44,8 +44,12 @@ const Login = () => {
         navigate('/')
         dispatch(notify('Successfully logged in', 'success', 10))
       })
-      .catch(() => {
-        dispatch(notify('Wrong username or password', 'error', 10))
+      .catch((error) => {
+        if (error.response && error.response.status === 403) {
+          dispatch(notify('Username not found.  Please create an account.', 'error', 10))
+        } else {
+          dispatch(notify('Wrong username or password', 'error', 10))
+        }
       })
   }
 

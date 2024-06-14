@@ -1,6 +1,6 @@
 .dockerignore
 .gitignore
 node_modules
-.prettierignore
+Dockerfile
 .eslintrc.js
 .env

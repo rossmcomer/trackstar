@@ -1,0 +1,17 @@
+FROM node:20 AS build-stage
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY . .
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8080/api
+
+RUN npm run build
+
+FROM nginx:stable-alpine3.19-perl
+COPY --from=build-stage /app/build /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]

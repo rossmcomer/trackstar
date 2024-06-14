@@ -1,7 +1,7 @@
 import axios from '../util/apiClient'
 import userService from '../services/user'
 
-const baseUrl = '/api/favorites'
+const baseUrl = '/favorites'
 
 const headers = {
   Authorization: userService.getUser()
