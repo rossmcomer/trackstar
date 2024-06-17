@@ -1,5 +1,5 @@
 import axios from '../util/apiClient'
-const baseUrl = '/logout'
+const baseUrl = '/api/logout'
 
 const logout = async (token) => {
   try {

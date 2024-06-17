@@ -8,6 +8,7 @@ import favoriteService from '../services/favorites'
 
 import { notify } from '../reducers/notification'
 import { setUser } from '../reducers/user'
+import { initializeFavorites } from '../reducers/favorites'
 
 const Login = () => {
   const username = useField('text')
@@ -40,7 +41,10 @@ const Login = () => {
       .then((user) => {
         userService.setUser(user) //sets localstorage STORAGE_KEY
         favoriteService.setToken(user.token) //sets headers.Authorization token
-        dispatch(setUser(user)) //sets state of User
+        dispatch(setUser(user))
+          .then(() => {
+            dispatch(initializeFavorites())
+          })
         navigate('/')
         dispatch(notify('Successfully logged in', 'success', 10))
       })
