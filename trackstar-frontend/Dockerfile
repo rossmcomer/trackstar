@@ -7,7 +7,7 @@ RUN npm ci
 
 COPY . .
 
-ENV REACT_APP_BACKEND_URL=http://3.149.247.65:8080
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
 
 RUN npm run build
 

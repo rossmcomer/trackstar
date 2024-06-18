@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 
 import { logout } from '../reducers/user'
 import userService from '../services/user'
+import { zeroFavorites } from '../reducers/favorites'
 
 const Logout = () => {
   const dispatch = useDispatch()
@@ -12,6 +13,7 @@ const Logout = () => {
   useEffect(() => {
     let token = userService.getToken()
     dispatch(logout(token))
+    dispatch(zeroFavorites())
     navigate('/')
   }, [])
 }

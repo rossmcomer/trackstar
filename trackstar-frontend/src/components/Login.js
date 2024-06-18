@@ -41,10 +41,11 @@ const Login = () => {
       .then((user) => {
         userService.setUser(user) //sets localstorage STORAGE_KEY
         favoriteService.setToken(user.token) //sets headers.Authorization token
-        dispatch(setUser(user))
-          .then(() => {
-            dispatch(initializeFavorites())
-          })
+        dispatch(setUser(user)) //sets state of User
+          // .then(() => {
+          //   dispatch(initializeFavorites())
+          // })
+        dispatch(initializeFavorites())
         navigate('/')
         dispatch(notify('Successfully logged in', 'success', 10))
       })

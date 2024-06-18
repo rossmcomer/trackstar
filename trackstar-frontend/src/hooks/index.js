@@ -15,8 +15,8 @@ export const useNotification = () => {
 export const useInitialization = () => {
   const dispatch = useDispatch()
 
-  return async () => {
-    await dispatch(initUser())
+  return () => {
+    dispatch(initUser())
     dispatch(initializeFavorites())
   }
 }
