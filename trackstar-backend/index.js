@@ -2,7 +2,6 @@ const express = require('express')
 require('express-async-errors')
 const app = express()
 const cors = require('cors')
-// app.use(express.static(path.join(__dirname, 'build')))
 
 const { PORT } = require('./util/config')
 const { connectToDatabase } = require('./util/db')
@@ -21,10 +20,6 @@ app.use('/login', loginRouter)
 app.use('/logout', logoutRouter)
 app.use('/favorites', favoritesRouter)
 app.use('/create-account', createAccountRouter)
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'))
-// })
 
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)

@@ -8,8 +8,8 @@ const sequelize = new Sequelize(DATABASE_URL, {
     ssl: {
       require: true,
       rejectUnauthorized: false,
-    }
-  }
+    },
+  },
 })
 
 const migrationConf = {

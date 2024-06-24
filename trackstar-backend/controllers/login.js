@@ -14,11 +14,9 @@ router.post('/', async (req, res) => {
       username: body.username.toLowerCase(),
     },
   })
-  
+
   if (!user) {
-    return res
-      .status(403)
-      .json({ error: 'User not found.' })
+    return res.status(403).json({ error: 'User not found.' })
   }
 
   const passwordCorrect = await bcryptjs.compare(

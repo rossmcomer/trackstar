@@ -144,15 +144,15 @@ const Markets = () => {
   }, [modalIsOpen, selectedCrypto])
 
   const addToFavorites = (id) => {
-    if(user){
+    if (user) {
       if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
         dispatch(createFavorite(id))
         dispatch(notify(`${id} added to Favorites`, 'success', 10))
       } else {
         dispatch(removeFavorite(id))
         dispatch(notify(`${id} removed from Favorites`, 'success', 10))
-      }}
-    else {
+      }
+    } else {
       dispatch(notify('Please log in to use this feature', 'error', 10))
     }
   }

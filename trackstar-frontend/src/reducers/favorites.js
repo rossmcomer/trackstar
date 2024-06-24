@@ -39,20 +39,20 @@ export const removeFavorite = (id) => {
 export const initializeFavorites = () => {
   return async (dispatch) => {
     const user = await userService.getUser()
-      if (user) {
-        const favorites = await favoriteService.getAll()
-        dispatch({
-          type: 'INIT_FAVORITES',
-          data: favorites,
-        })
-      }
+    if (user) {
+      const favorites = await favoriteService.getAll()
+      dispatch({
+        type: 'INIT_FAVORITES',
+        data: favorites,
+      })
+    }
   }
 }
 
 export const zeroFavorites = () => {
   return {
-      type: 'ZERO_FAVORITES',
-      data: []
+    type: 'ZERO_FAVORITES',
+    data: [],
   }
 }
 

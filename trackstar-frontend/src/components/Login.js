@@ -42,16 +42,22 @@ const Login = () => {
         userService.setUser(user) //sets localstorage STORAGE_KEY
         favoriteService.setToken(user.token) //sets headers.Authorization token
         dispatch(setUser(user)) //sets state of User
-          // .then(() => {
-          //   dispatch(initializeFavorites())
-          // })
+        // .then(() => {
+        //   dispatch(initializeFavorites())
+        // })
         dispatch(initializeFavorites())
         navigate('/')
         dispatch(notify('Successfully logged in', 'success', 10))
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {
-          dispatch(notify('Username not found.  Please create an account.', 'error', 10))
+          dispatch(
+            notify(
+              'Username not found.  Please create an account.',
+              'error',
+              10,
+            ),
+          )
         } else {
           dispatch(notify('Wrong username or password', 'error', 10))
         }
