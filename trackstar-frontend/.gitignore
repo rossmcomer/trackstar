@@ -3,6 +3,7 @@
 todo.txt
 prettierignore
 prettierrc.json
+nginx.conf
 
 # dependencies
 /node_modules

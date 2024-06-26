@@ -1,2 +1,3 @@
 docker-compose.yml
 trackstar-kp.pem
+nginx.conf

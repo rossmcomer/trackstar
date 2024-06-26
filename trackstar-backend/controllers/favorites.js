@@ -5,12 +5,12 @@ const { tokenExtractor } = require('../util/middleware')
 
 router.get('/', tokenExtractor, async (req, res) => {
   const user = await User.findByPk(req.decodedToken.id)
-  const favoritesList = await FavoritesList.findOne({
-    where: { userId: user.id },
-  })
 
   if (user) {
     try {
+      const favoritesList = await FavoritesList.findOne({
+        where: { userId: user.id },
+      })
       const favorites = await Favorite.findAll({
         where: { favoritesListId: favoritesList.id },
         order: [['coingecko_id', 'ASC']],
