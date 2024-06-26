@@ -41,10 +41,12 @@ export const initializeFavorites = () => {
     const user = await userService.getUser()
     if (user) {
       const favorites = await favoriteService.getAll()
-      dispatch({
-        type: 'INIT_FAVORITES',
-        data: favorites,
-      })
+      if (favorites) {
+        dispatch({
+          type: 'INIT_FAVORITES',
+          data: favorites,
+        })
+      }
     }
   }
 }
