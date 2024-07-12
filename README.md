@@ -1,7 +1,7 @@
 # TRACKSTAR
-## Live Updated List of the Top 20 Trending Cryptocurrencies With Custom Watchlists
+## Live Updated List of the Top Trending Cryptocurrencies With Custom Watchlists
 
-Visit the app at http://3.149.247.65/
+Visit the app at https://trackstarapp.com
 
 ### HOW TO USE CREATE A CUSTOM WATCHLIST WITH TRACKSTAR
 
