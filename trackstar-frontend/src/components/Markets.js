@@ -163,7 +163,7 @@ const Markets = () => {
 
   return (
     <div className="MarketsContainer">
-      <div className="marketsTitle">Top Trending Coins</div>
+      <div className="marketsTitle">Trending</div>
       <div className="TableContainer">
         <table className="marketsTable">
           <thead>
