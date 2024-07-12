@@ -175,6 +175,7 @@ const Favorites = () => {
     <div className="MarketsContainer">
       {user ? (
         <div className="TableContainer">
+          <div className="marketsTitle">Favorites</div>
           <table className="marketsTable">
             <thead>
               <tr id="marketsHeader">

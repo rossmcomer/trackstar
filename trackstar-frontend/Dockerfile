@@ -7,7 +7,7 @@ RUN npm ci
 
 COPY . .
 
-ENV REACT_APP_BACKEND_URL=http://3.149.247.65
+ENV REACT_APP_BACKEND_URL=https://trackstarapp.com
 
 RUN npm run build
 
