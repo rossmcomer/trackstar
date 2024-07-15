@@ -163,7 +163,6 @@ const Markets = () => {
 
   return (
     <div className="MarketsContainer">
-      <div className="marketsTitle">Trending</div>
       <div className="TableContainer">
         <table className="marketsTable">
           <thead>
