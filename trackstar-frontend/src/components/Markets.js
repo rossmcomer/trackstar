@@ -175,7 +175,7 @@ const Markets = () => {
   }
 
   return (
-    <div className="MarketsContainer">
+    <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
       <div className="TableContainer">
         <table className="marketsTable">
           <thead>

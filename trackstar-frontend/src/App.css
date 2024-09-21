@@ -8,6 +8,20 @@ body {
   background-image: url('./assets/liquid-cheese.svg');
   background-attachment: fixed;
   background-size: cover;
+
+  animation: moveBackground 10s forwards;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: center right;
+  }
+  50% {
+    background-position: left bottom;
+  }
+  100% {
+    background-position: center right;
+  }
 }
 
 /*header section*/
@@ -70,6 +84,7 @@ body {
 .navbar-toggler-icon:focus {
   outline: none;
   box-shadow: none;
+  color: #1d19ec;
 }
 
 .nav-item {
@@ -83,7 +98,6 @@ body {
   color: #1c19ec;
   text-align: center;
   text-transform: uppercase;
-  transition: text-shadow 1s ease;
   font-size: 18px
 }
 
@@ -92,17 +106,19 @@ body {
   0 5 50px #1d19ec73, 0 5 200px #1d19ec73;
   color: #1c19ec;
   transform: translate(2px, 1px);
-  transition: transform 0.3s ease
+  transition: text-shadow 1s ease, transform 0.3s ease;
 }
 
 /*end header section*/
 
 #loggedInNotice {
-  color: white;
-  margin: 10px 15px;
+  color:#1c19ec;
+  margin-top: 100px;
+  margin-left: 15px;
   display: flex;
   flex-shrink: none;
   min-width: 240px;
+  text-shadow: 5px 5px 30px #0000005b
 }
 
 /*login section*/
@@ -165,7 +181,7 @@ body {
   padding: 0.25rem 0.5rem;
   color: #1c19ec;
   border-radius: 2px;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.15);
 }
 
 .login-button:hover {
@@ -185,32 +201,27 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 10rem;
+  width: 5rem;
+  margin-top: 80px;
+  margin-left: 40px
 }
 
 #logout-button {
   font-family: inherit;
-  background-color: #1c19ec;
+  background-color: transparent;
   border: none;
   margin-top: 10px;
-  transition-duration: 0.3s;
-  transition-property: box-shadow;
-  transform: perspective(1px) translateZ(0);
   padding: 0.25rem 0.5rem;
-  color: #020024;
+  color: #1c19ec;
   border-radius: 2px;
-  margin: 10px 15px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.15);
 }
 
 #logout-button:hover {
-  box-shadow:
-    inset 0 0 0 2px #1c19ec,
-    0 0 1px rgba(0, 0, 0, 0);
-  background-color: transparent;
-  color: #1c19ec;
+  transition: transform 0.3s ease, backdrop-filter 1s ease,
+  box-shadow .3s ease;
+  transform: translate(2px, 1px);
+  backdrop-filter: saturate(5)
 }
 
 .load-more-button {
@@ -268,7 +279,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top:150px
 }
 
 .TableContainer {
