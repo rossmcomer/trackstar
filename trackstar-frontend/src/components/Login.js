@@ -71,11 +71,11 @@ const Login = () => {
       <form onSubmit={handleLogin} className="loginForm">
         <div className="inputContainer">
           Username:
-          <input {...username.fields} placeholder="example@domain.com" />
+          <input {...username.fields} placeholder="example@domain.com" className='inputBox' />
         </div>
         <div className="inputContainer">
           Password:
-          <input {...password.fields} placeholder="password" />
+          <input {...password.fields} placeholder="password" className='inputBox'/>
         </div>
         <button className="login-button" type="submit">
           Login
