@@ -172,7 +172,7 @@ const Favorites = () => {
   }
 
   return (
-    <div className="MarketsContainer">
+    <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
       {user ? (
         <div className="TableContainer">
           <table className="marketsTable">
