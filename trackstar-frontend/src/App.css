@@ -264,41 +264,56 @@ body {
   margin: 0 auto;
 }
 
-#marketsHeader th:not(:last-child) {
-  border-right: 1px solid #020230;
-}
+/* #marketsHeader th:not(:last-child) {
+  border-right: 1px solid #1c19ec;
+} */
 
 table {
   margin: 20px auto;
-  border-collapse: collapse;
-  backdrop-filter: blur(3px) saturate(131%);
-  -webkit-backdrop-filter: blur(3px) saturate(131%);
-  background-color: rgba(17, 25, 40, 0.59);
   border: 1px solid rgba(255, 255, 255, 0.125);
-  width: [object object]px;
-  height: [object object]px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  border-collapse:separate;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 th,
 td {
-  border: 1px solid #008b13;
-  padding: 0.3rem;
+  
+  padding: .8rem;
   text-align: left;
 }
 
+/* td {
+  border: .2px solid #1c19ec;
+} */
+
 th {
-  background-color: #008b13;
+  background-color: #0dce3d98;
   font-weight: bold;
   text-align: center;
   white-space: nowrap;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+tr {
+  border: none
 }
 
 td {
   color: #f2f2f2;
   text-align: center;
+  backdrop-filter: blur(10px) saturate(131%);
+  -webkit-backdrop-filter: blur(10px) saturate(131%);
+  background-color: rgba(17, 25, 40, 0.59);
 }
 
 #viewChartBtn {
