@@ -21,11 +21,10 @@ body {
 #headerDiv {
   position: fixed;
   min-width: 240px;
-  border-bottom: solid 2px #414141;
   background-color: #ffffffd8;
   z-index: 5;
   width: 100%;
-  box-shadow: 0px 4px 20px #00000025;
+  box-shadow: 0px 2px 15px #00000025;
 }
 
 .navBrand {
@@ -196,7 +195,7 @@ body {
 
 .load-more-button {
   font-family: inherit;
-  border-color: #1c19ec;
+  border-color: #1d19ec63;
   border: none;
   margin-top: 10px;
   transform: perspective(1px) translateZ(0);
@@ -249,37 +248,30 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top:100px
-}
-
-.marketsTitle {
-  color: #fff;
-  font-size: 30px;
-  font-weight: 500;
+  margin-top:150px
 }
 
 .TableContainer {
   text-align: center;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-x: auto;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 0;
+  border-radius: 15px;
 }
-
 /* #marketsHeader th:not(:last-child) {
   border-right: 1px solid #1c19ec;
 } */
 
 table {
-  margin: 20px auto;
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  margin: 0px;
   border-collapse:separate;
   border-radius: 10px;
   overflow: hidden;
+  padding: 0;
 }
 
 th,
@@ -289,12 +281,24 @@ td {
   text-align: left;
 }
 
+thead {
+  width: 100%
+}
+
+.marketsTable {
+  background-color: transparent;
+}
+
+tbody {
+
+}
+
 /* td {
   border: .2px solid #1c19ec;
 } */
 
 th {
-  background-color: #0dce3d98;
+  background-color: #23c94cc4;
   font-weight: bold;
   text-align: center;
   white-space: nowrap;
@@ -330,7 +334,7 @@ td {
   font-size: 15px;
   color: #ffffff;
   transform-origin: center top;
-  transition: color .5s ease
+  transition: color .5s ease, transform .5s ease
 }
 
 #viewChartBtn:hover {
