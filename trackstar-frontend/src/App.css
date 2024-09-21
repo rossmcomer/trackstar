@@ -30,6 +30,15 @@ body {
   font-size: 24px;
   text-transform: uppercase;
   margin: 10px 15px;
+  transition: text-shadow 1s ease;
+}
+
+.navBrand:hover {
+  text-shadow: 0 5 25px #1d19ec73,
+  0 5 50px #1d19ec73, 0 5 200px #1d19ec73;
+  color:#1c19ec;
+  transform: translate(2px, 1px);
+  transition: transform 0.3s ease
 }
 
 #responsive-navbar-nav {
@@ -69,6 +78,15 @@ body {
   color: #1c19ec;
   text-align: center;
   text-transform: uppercase;
+  transition: text-shadow 1s ease
+}
+
+.nav-link:hover {
+  text-shadow:  0 5 25px #1d19ec73,
+  0 5 50px #1d19ec73, 0 5 200px #1d19ec73;
+  color: #1c19ec;
+  transform: translate(2px, 1px);
+  transition: transform 0.3s ease
 }
 
 /*end header section*/
@@ -252,7 +270,7 @@ body {
 }
 
 table {
-  margin: 0 auto;
+  margin: 20px auto;
   border-collapse: collapse;
   backdrop-filter: blur(3px) saturate(131%);
   -webkit-backdrop-filter: blur(3px) saturate(131%);
@@ -267,13 +285,13 @@ table {
 
 th,
 td {
-  border: 1px solid #fcdf3e;
+  border: 1px solid #008b13;
   padding: 0.3rem;
   text-align: left;
 }
 
 th {
-  background-color: #fcdf3e;
+  background-color: #008b13;
   font-weight: bold;
   text-align: center;
   white-space: nowrap;
@@ -294,7 +312,7 @@ td {
 }
 
 #viewChartBtn:hover {
-  color: #020230;
+  color: #1c19ec;
   transform: scale(1.2);
 }
 
