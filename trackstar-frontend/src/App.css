@@ -5,8 +5,7 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #020230;
   overflow-x: auto;
-  background-color: #020230;
-  background: #d3d1c6;
+  background-image: url('./assets/liquid-cheese.svg');
   background-size: cover;
 }
 
@@ -34,11 +33,11 @@ body {
 }
 
 .navBrand:hover {
-  text-shadow: 0 5 25px #1d19ec73,
-  0 5 50px #1d19ec73, 0 5 200px #1d19ec73;
+  text-shadow: 0 5 5px #1d19ec;
   color:#1c19ec;
   transform: translate(2px, 1px);
-  transition: transform 0.3s ease
+  transition: transform 0.3s ease;
+
 }
 
 #responsive-navbar-nav {
@@ -322,6 +321,11 @@ td {
   background-color: transparent;
   cursor: pointer;
   font-size: 20px;
+}
+
+#favBtn:hover {
+  transform: translate(2px, 1px);
+  transition: transform 0.3s ease;
 }
 
 .Modal {
