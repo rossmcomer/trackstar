@@ -289,10 +289,6 @@ thead {
   background-color: transparent;
 }
 
-tbody {
-
-}
-
 /* td {
   border: .2px solid #1c19ec;
 } */
@@ -357,11 +353,12 @@ td {
 
 .Modal {
   position: absolute;
-  top: 40px;
+  top: 20%;
   left: 20%;
   right: 20%;
-  background: rgb(228, 228, 228);
+  background: #d3d3d3;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .Overlay {
@@ -373,11 +370,26 @@ td {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
+.apexcharts-zoom-icon svg {
+  stroke:#1c19ec
+}
+
 #chartBtnContainer {
   display: flex;
   justify-content: right;
 }
 
 #chartBtn {
-  color: black;
+  color: #1c19ec;
+  border-radius: 5px;
+  border: none;
+  transition: text-shadow 1s ease;
+  background-color: #d3d3d3;
+}
+
+#chartBtn:hover {
+  text-shadow: 0 5 5px #1d19ec;
+  color:rgb(28, 25, 236);
+  transform: translate(1px, 1px);
+  transition: transform 0.3s ease;
 }

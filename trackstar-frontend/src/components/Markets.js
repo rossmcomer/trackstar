@@ -75,6 +75,18 @@ const Markets = () => {
               ]),
             },
           ],
+          grid: {
+            borderColor: '#000000',
+            xaxis: {
+              lines: {
+                show: true,
+                color: '#1c19ec',
+              }
+            }
+          },
+          stroke: {
+            colors: ['#1c19ec']
+          },
           chart: {
             type: 'area',
             stacked: false,
@@ -106,6 +118,7 @@ const Markets = () => {
               opacityFrom: 0.5,
               opacityTo: 0,
               stops: [0, 90, 100],
+              gradientToColors: ['#1c19ec']
             },
           },
           yaxis: {
