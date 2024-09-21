@@ -2,16 +2,11 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #020230;
   overflow-x: auto;
   background-color: #020230;
-  background: linear-gradient(
-    90deg,
-    #020024 0%,
-    rgba(9, 9, 121, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: #d3d1c6;
   background-size: cover;
 }
 
@@ -26,11 +21,12 @@ body {
 #headerDiv {
   position: sticky;
   min-width: 240px;
+  background-color: #77777788;
 }
 
 .navBrand {
   font-weight: bold;
-  color: #ffffff;
+  color: #1c19ec;
   font-size: 24px;
   text-transform: uppercase;
   margin: 10px 15px;
@@ -70,7 +66,7 @@ body {
 .nav-link {
   padding: 3px 15px;
   margin: 10px 15px;
-  color: #ffffff;
+  color: #1c19ec;
   text-align: center;
   text-transform: uppercase;
 }
@@ -186,8 +182,6 @@ body {
   border-radius: 2px;
   margin: 10px 15px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
   font-weight: bold;
 }
 

@@ -4,3 +4,4 @@ node_modules
 Dockerfile
 .eslintrc.js
 .env
+instructions.txt
