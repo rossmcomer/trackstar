@@ -8,8 +8,10 @@ const Header = () => {
     <header>
       <div id="headerDiv">
         <Navbar collapseOnSelect expand="lg" variant="dark" className="navBar">
-          <Navbar.Brand as={Link} to="/" className="navBrand">
+          <Navbar.Brand as={Link} to="/" className="navBrandWrapper">
+            <div className='navBrand'>
             TRACKSTAR
+            </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -24,7 +26,7 @@ const Header = () => {
                   Favorites
                 </Link>
               </Nav.Link>
-              <Nav.Link href="#" as="span">
+              <Nav.Link href="#" as="span" className="nav-item">
                 {user ? (
                   <Link to="/logout" className="nav-link">
                     logout
