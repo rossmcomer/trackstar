@@ -47,9 +47,9 @@ body {
   text-transform: uppercase;
   margin: 10px 15px;
   margin-left: 40px;
-  transition: text-shadow 1s ease;
   animation: flyInHeader 1.5s ease-out forwards;
   transform: translate(500px, -500px);
+  opacity: 1;
 }
 
 @keyframes flyInHeader {
@@ -68,10 +68,19 @@ body {
 }
 
 .navBrand:hover {
-  text-shadow: 0 5 5px #1d19ec;
-  color:rgb(28, 25, 236);
+  color:#1c19ec;
   transform: translate(2px, 1px);
   transition: transform 0.3s ease;
+  opacity: 1;
+}
+
+.navBar {
+  --bs-navbar-color: #1c19ec;
+  --bs-navbar-hover-color: #1c19ec;
+  --bs-navbar-disabled-color: #1c19ec;
+  --bs-navbar-brand-color: #1c19ec;
+  --bs-navbar-brand-hover-color: #1c19ec;
+  --bs-navbar-toggler-border-color: #1c19ec;
 }
 
 #responsive-navbar-nav {
