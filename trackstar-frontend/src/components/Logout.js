@@ -12,10 +12,17 @@ const Logout = () => {
 
   useEffect(() => {
     let token = userService.getToken()
-    dispatch(logout(token))
-    dispatch(zeroFavorites())
-    navigate('/')
+    try {
+      dispatch(logout(token))
+      dispatch(zeroFavorites())
+      navigate('/')
+    }
+    catch (error) {
+      console.error('Logout failed:', error)
+    }
   }, [])
+
+  return
 }
 
 export default Logout

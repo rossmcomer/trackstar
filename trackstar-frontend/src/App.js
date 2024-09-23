@@ -32,15 +32,8 @@ function App() {
           <Route path="/" element={<Markets />} />
           <Route path="/markets" element={<Markets />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route
-            path="/login"
-            element={
-              <>
-                <Login />
-                <CreateAccount />
-              </>
-            }
-          />
+          <Route path="/login" element={<Login />}/>
+          <Route path="/signup" element={<CreateAccount />}/>
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>

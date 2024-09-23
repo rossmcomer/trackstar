@@ -80,6 +80,11 @@ const Login = () => {
           Login
         </button>
       </form>
+      <div className="signUpCallToAction">
+        <div>(First time here?&nbsp;</div>
+        <a className="signUpLink" onClick={() => navigate('/signup')}>Sign up!</a>
+        <div>)</div>
+      </div>
     </div>
   )
 }
