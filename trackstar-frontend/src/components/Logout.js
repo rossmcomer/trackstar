@@ -16,8 +16,7 @@ const Logout = () => {
       dispatch(logout(token))
       dispatch(zeroFavorites())
       navigate('/')
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Logout failed:', error)
     }
   }, [])

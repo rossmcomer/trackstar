@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../App.css'
 import Modal from 'react-modal'
-import ApexCharts from 'apexcharts'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
 import { notify } from '../reducers/notification'
@@ -81,7 +80,10 @@ const Markets = () => {
   }
 
   return (
-    <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
+    <div
+      className="MarketsContainer"
+      style={{ marginTop: user === null ? '150px' : '20px' }}
+    >
       <div className="TableContainer">
         <MarketsTable
           cryptos={cryptos}
@@ -91,6 +93,11 @@ const Markets = () => {
           openModal={openModal}
           loadMore={loadMore}
         />
+        {visible < cryptos.length && (
+          <button onClick={loadMore} className="load-more-button">
+            Load More
+          </button>
+        )}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
@@ -106,11 +113,6 @@ const Markets = () => {
           </div>
         </Modal>
       </div>
-      {visible < cryptos.length && (
-        <button onClick={loadMore} className="load-more-button">
-          Load More
-        </button>
-      )}
     </div>
   )
 }

@@ -47,8 +47,7 @@ export const initializeFavorites = () => {
           data: favorites,
         })
       }
-    }
-    else {
+    } else {
       dispatch({
         type: 'ZERO_FAVORITES',
       })
@@ -59,7 +58,7 @@ export const initializeFavorites = () => {
 export const zeroFavorites = () => {
   return async (dispatch) => {
     dispatch({
-      type: 'ZERO_FAVORITES'
+      type: 'ZERO_FAVORITES',
     })
   }
 }

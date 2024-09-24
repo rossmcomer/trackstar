@@ -42,9 +42,6 @@ const Login = () => {
         userService.setUser(user) //sets localstorage STORAGE_KEY
         favoriteService.setToken(user.token) //sets headers.Authorization token
         dispatch(setUser(user)) //sets state of User
-        // .then(() => {
-        //   dispatch(initializeFavorites())
-        // })
         dispatch(initializeFavorites())
         navigate('/')
         dispatch(notify('Successfully logged in', 'success', 10))
@@ -70,11 +67,19 @@ const Login = () => {
       <form onSubmit={handleLogin} className="loginForm">
         <div className="inputContainer">
           Username:
-          <input {...username.fields} placeholder="example@domain.com" className='inputBox' />
+          <input
+            {...username.fields}
+            placeholder="example@domain.com"
+            className="inputBox"
+          />
         </div>
         <div className="inputContainer">
           Password:
-          <input {...password.fields} placeholder="password" className='inputBox'/>
+          <input
+            {...password.fields}
+            placeholder="password"
+            className="inputBox"
+          />
         </div>
         <button className="login-button" type="submit">
           Login
@@ -82,7 +87,9 @@ const Login = () => {
       </form>
       <div className="signUpCallToAction">
         <div>(First time here?&nbsp;</div>
-        <a className="signUpLink" onClick={() => navigate('/signup')}>Sign up!</a>
+        <a className="signUpLink" onClick={() => navigate('/signup')}>
+          Sign up!
+        </a>
         <div>)</div>
       </div>
     </div>

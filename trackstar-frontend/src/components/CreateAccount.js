@@ -60,15 +60,27 @@ const CreateAccount = () => {
       <form onSubmit={handleCreateAccount} className="loginForm">
         <div className="inputContainer">
           Username:
-          <input {...username.fields} placeholder="example@domain.com" className='inputBox'/>
+          <input
+            {...username.fields}
+            placeholder="example@domain.com"
+            className="inputBox"
+          />
         </div>
         <div className="inputContainer">
           Password:
-          <input {...password.fields} placeholder="password" className='inputBox'/>
+          <input
+            {...password.fields}
+            placeholder="password"
+            className="inputBox"
+          />
         </div>
         <div className="inputContainer">
           Confirm Password:
-          <input {...confirm.fields} placeholder="confirm password"className='inputBox' />
+          <input
+            {...confirm.fields}
+            placeholder="confirm password"
+            className="inputBox"
+          />
         </div>
         <button className="login-button" type="submit">
           Sign Up

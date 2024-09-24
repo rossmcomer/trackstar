@@ -31,8 +31,7 @@ export const logout = () => {
       favoriteService.setToken(null)
       dispatch(clearUser())
       dispatch(notify('Successfully logged out', 'success', 10))
-    }
-    catch (error) {
+    } catch (error) {
       dispatch(notify('Error logging out. Please try again.', 'error', 10))
       console.error(error)
     }
