@@ -49,21 +49,17 @@ body {
   margin-left: 40px;
   animation: flyInHeader 1.5s ease-out forwards;
   transform: translate(500px, -500px);
-  opacity: 1;
 }
 
 @keyframes flyInHeader {
   0% {
     transform: translate(500px, -500px);
-    opacity: 0;
   }
   50% {
     transform: translate(100px, -100px);
-    opacity: 0.5;
   }
   100% {
     transform: translate(0, 0);
-    opacity: 1;
   }
 }
 
@@ -71,7 +67,6 @@ body {
   color:#1c19ec;
   transform: translate(2px, 1px);
   transition: transform 0.3s ease;
-  opacity: 1;
 }
 
 .navBar {
@@ -120,22 +115,18 @@ body {
   display: flex;
   justify-content: center;
   transform: translate(-500px, -500px);
-  opacity: 1;
   animation: flyInText 1.5s ease-out forwards;
 }
 
 @keyframes flyInText {
   0% {
     transform: translate(-500px, -500px);
-    opacity: 0;
   }
   50% {
     transform: translate(-100px, -100px);
-    opacity: 0.5;
   }
   100% {
     transform: translate(0, 0);
-    opacity: 1;
   }
 }
 
@@ -173,15 +164,12 @@ body {
 @keyframes flyInLoggedInNotice {
   0% {
     transform: translate(-500px);
-    opacity: 0;
   }
   50% {
     transform: translate(-100px);
-    opacity: 0.5;
   }
   100% {
     transform: translate(0);
-    opacity: 1;
   }
 }
 
