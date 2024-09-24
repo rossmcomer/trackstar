@@ -24,12 +24,18 @@ export const initUser = () => {
 
 export const logout = () => {
   return async (dispatch) => {
-    let token = await userService.getToken()
-    logoutService.logout(token) //sends information to backend
-    userService.clearUser() //removes from localstorage and makes user token=null
-    favoriteService.setToken(null) //sets favorite token = null
-    dispatch(clearUser()) // clears user state
-    dispatch(notify('Successfully logged out', 'success', 10))
+    try {
+      let token = await userService.getToken()
+      await logoutService.logout(token)
+      userService.clearUser()
+      favoriteService.setToken(null)
+      dispatch(clearUser())
+      dispatch(notify('Successfully logged out', 'success', 10))
+    }
+    catch (error) {
+      dispatch(notify('Error logging out. Please try again.', 'error', 10))
+      console.error(error)
+    }
   }
 }
 

@@ -39,7 +39,7 @@ export const removeFavorite = (id) => {
 export const initializeFavorites = () => {
   return async (dispatch) => {
     const user = await userService.getUser()
-    if (user) {
+    if (user && user.token) {
       const favorites = await favoriteService.getAll()
       if (favorites) {
         dispatch({
