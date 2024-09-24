@@ -6,6 +6,7 @@ import ApexCharts from 'apexcharts'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
 import { notify } from '../reducers/notification'
+import MarketsTable from './MarketsTable'
 
 const Markets = () => {
   const dispatch = useDispatch()
@@ -177,45 +178,14 @@ const Markets = () => {
   return (
     <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
       <div className="TableContainer">
-        <table className="marketsTable">
-          <thead>
-            <tr id="marketsHeader">
-              <th colSpan="2">Ticker</th>
-              <th>Price</th>
-              <th>24hr Change%</th>
-              <th>Favorite</th>
-              <th>View Chart</th>
-              <th>Market Cap</th>
-              <th>Volume</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cryptos.slice(0, visible).map((crypto) => (
-              <tr key={crypto.id} className="cryptoRow">
-                <td>
-                  <img src={crypto.image} alt="Logo" width="20px"></img>
-                </td>
-                <td>{crypto.symbol.toUpperCase()}</td>
-                <td>${crypto.current_price}</td>
-                <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
-                <td>
-                  <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
-                    {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
-                      ? '★'
-                      : '☆'}
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => openModal(crypto)} id="viewChartBtn">
-                    View
-                  </button>
-                </td>
-                <td>${crypto.market_cap.toLocaleString()}</td>
-                <td>${crypto.total_volume.toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <MarketsTable
+          cryptos={cryptos}
+          visible={visible}
+          addToFavorites={addToFavorites}
+          favorites={favorites}
+          openModal={openModal}
+          loadMore={loadMore}
+        />
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
