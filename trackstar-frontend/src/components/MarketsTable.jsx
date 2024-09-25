@@ -7,6 +7,7 @@ const MarketsTable = ({
   favorites,
   openModal,
 }) => {
+  console.log(cryptos)
   return (
     <table className="marketsTable">
       <thead>
@@ -24,9 +25,15 @@ const MarketsTable = ({
         {cryptos.slice(0, visible).map((crypto) => (
           <tr key={crypto.id} className="cryptoRow">
             <td>
-              <img src={crypto.image} alt="Logo" width="20px" />
+              <a href={`https://www.coingecko.com/en/coins/${crypto.id.toLowerCase()}`} rel="coingeckopage">
+                <img src={crypto.image} alt="Logo" width="20px" />
+              </a>
             </td>
-            <td>{crypto.symbol.toUpperCase()}</td>
+            <td>
+              <a href={`https://www.coingecko.com/en/coins/${crypto.id.toLowerCase()}`} rel="coingeckopage" className="coinGeckoLink">
+                {crypto.symbol.toUpperCase()}
+              </a>
+            </td>
             <td>${crypto.current_price.toLocaleString()}</td>
             <td>{crypto.price_change_percentage_24h.toFixed(2)}%</td>
             <td>

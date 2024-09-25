@@ -441,6 +441,11 @@ tr {
   border: none;
 }
 
+.coinGeckoLink {
+  text-decoration: none;
+  color: #f2f2f2;
+}
+
 td {
   color: #f2f2f2;
   text-align: center;
