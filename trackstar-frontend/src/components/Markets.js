@@ -91,13 +91,7 @@ const Markets = () => {
           addToFavorites={addToFavorites}
           favorites={favorites}
           openModal={openModal}
-          loadMore={loadMore}
         />
-        {visible < cryptos.length && (
-          <button onClick={loadMore} className="load-more-button">
-            Load More
-          </button>
-        )}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
@@ -113,6 +107,11 @@ const Markets = () => {
           </div>
         </Modal>
       </div>
+      {visible < cryptos.length && (
+        <button onClick={loadMore} className="load-more-button">
+          Load More
+        </button>
+      )}
     </div>
   )
 }

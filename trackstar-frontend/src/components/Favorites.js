@@ -102,13 +102,7 @@ const Favorites = () => {
             addToFavorites={addToFavorites}
             favorites={favorites}
             openModal={openModal}
-            loadMore={loadMore}
           />
-          {visible < cryptos.length && (
-            <button onClick={loadMore} className="load-more-button">
-              Load More
-            </button>
-          )}
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
@@ -128,6 +122,11 @@ const Favorites = () => {
         <div id="pleaseLoginContainer">
           <div id="pleaseLoginNotice">Please log in to use this feature.</div>
         </div>
+      )}
+      {visible < cryptos.length && (
+        <button onClick={loadMore} className="load-more-button">
+          Load More
+        </button>
       )}
     </div>
   )

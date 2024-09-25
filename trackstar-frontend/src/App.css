@@ -9,17 +9,18 @@ body {
   background-attachment: fixed;
   background-size: cover;
   animation: moveBackground 5s both;
+  font-weight: 400;
 }
 
 @keyframes moveBackground {
   0% {
-    background-position: center right;
+    background-position: center;
   }
   50% {
     background-position: left bottom;
   }
   100% {
-    background-position: center right;
+    background-position: center;
   }
 }
 
@@ -29,6 +30,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 #headerDiv {
@@ -47,7 +49,7 @@ body {
   text-transform: uppercase;
   margin: 10px 15px;
   margin-left: 40px;
-  animation: flyInHeader 1.5s ease-out forwards;
+  animation: flyInHeader 1s ease-out forwards;
   transform: translate(500px, -500px);
 }
 
@@ -115,7 +117,7 @@ body {
   display: flex;
   justify-content: center;
   transform: translate(-500px, -500px);
-  animation: flyInText 1.5s ease-out forwards;
+  animation: flyInText 1s ease-out forwards;
 }
 
 @keyframes flyInText {
@@ -137,6 +139,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .nav-link:hover {
@@ -161,8 +164,9 @@ body {
   flex-shrink: none;
   min-width: 240px;
   text-shadow: 5px 5px 30px #0000005b;
-  animation: flyInLoggedInNotice 1.5s ease-out forwards;
+  animation: flyInLoggedInNotice 1s ease-out forwards;
   transform: translate(-500px);
+  font-weight: 500;
 }
 
 @keyframes flyInLoggedInNotice {
@@ -196,7 +200,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 10rem;
+  width: 200px;
   margin-top: 150px;
   color: #1c19ec;
   animation: flyInFromLeft 0.5s ease-out forwards;
@@ -231,6 +235,7 @@ body {
   border: none;
   border-radius: 5px;
   box-shadow: 10px 10px 20px #00000013;
+  margin-bottom: 10px;
 }
 
 .inputBox:focus {
@@ -241,7 +246,6 @@ body {
   font-family: inherit;
   background-color: transparent;
   border: none;
-  margin-top: 10px;
   transition-duration: 0.3s;
   transition-property: box-shadow;
   transform: perspective(1px) translateZ(0);
@@ -249,6 +253,7 @@ body {
   color: #1c19ec;
   border-radius: 2px;
   box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.15);
+  font-weight: bold;
 }
 
 .login-button:hover {
@@ -301,6 +306,7 @@ body {
   color: #1c19ec;
   border-radius: 2px;
   box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.15);
+  font-weight: bold;
 }
 
 #logout-button:hover {
@@ -327,7 +333,6 @@ body {
   background-color: transparent;
   transition: transform 0.3s ease;
   backdrop-filter: none;
-  animation-delay: 5s;
 }
 
 .load-more-button:hover {
@@ -369,10 +374,8 @@ body {
 .MarketsContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  transform: scale(5);
-  animation: flyIn 1.5s ease-out forwards;
+  animation: flyIn 1s ease-out forwards;
 }
 
 @keyframes flyIn {
@@ -391,49 +394,40 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow-x: auto;
-  max-width: 100%;
+  align-items: flex-start;
   margin: 0;
   border-radius: 15px;
+  overflow-x: auto;
+  max-width: 100%;
+  position: relative;
 }
-/* #marketsHeader th:not(:last-child) {
-  border-right: 1px solid #1c19ec;
-} */
 
 table {
   margin: 0px;
   border-collapse: separate;
   border-radius: 10px;
-  overflow: hidden;
   padding: 0;
 }
 
 th,
 td {
-  overflow: hidden;
   padding: 0.8rem;
   text-align: left;
 }
 
-thead {
+thead, tbody {
   width: 100%;
+  white-space: nowrap;
 }
 
 .marketsTable {
   background-color: transparent;
 }
 
-/* td {
-  border: .2px solid #1c19ec;
-} */
-
 th {
   background-color: #23c94cc4;
   font-weight: bold;
   text-align: center;
-  white-space: nowrap;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -488,8 +482,8 @@ td {
 .Modal {
   position: absolute;
   top: 20%;
-  left: 20%;
-  right: 20%;
+  left: 10%;
+  right: 10%;
   background: #d3d3d3;
   padding: 20px;
   border-radius: 10px;
@@ -519,6 +513,7 @@ td {
   border: none;
   transition: text-shadow 1s ease;
   background-color: #d3d3d3;
+  font-weight: bold;
 }
 
 #chartBtn:hover {
