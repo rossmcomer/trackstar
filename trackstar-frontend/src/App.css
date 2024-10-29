@@ -8,20 +8,7 @@ body {
   background-image: url("./assets/liquid-cheese.svg");
   background-attachment: fixed;
   background-size: cover;
-  animation: moveBackground 5s both;
   font-weight: 400;
-}
-
-@keyframes moveBackground {
-  0% {
-    background-position: center;
-  }
-  50% {
-    background-position: left bottom;
-  }
-  100% {
-    background-position: center;
-  }
 }
 
 /*header section*/
