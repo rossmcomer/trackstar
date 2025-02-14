@@ -36,19 +36,15 @@ body {
   text-transform: uppercase;
   margin: 10px 15px;
   margin-left: 40px;
-  animation: flyInHeader 1s ease-out forwards;
-  transform: translate(500px, -500px);
+  animation: fadeIn 1s ease-out forwards;
 }
 
-@keyframes flyInHeader {
+@keyframes fadeIn {
   0% {
-    transform: translate(500px, -500px);
-  }
-  50% {
-    transform: translate(100px, -100px);
+    opacity: 0;
   }
   100% {
-    transform: translate(0, 0);
+    opacity: 1;
   }
 }
 
@@ -103,20 +99,7 @@ body {
 .nav-item {
   display: flex;
   justify-content: center;
-  transform: translate(-500px, -500px);
-  animation: flyInText 1s ease-out forwards;
-}
-
-@keyframes flyInText {
-  0% {
-    transform: translate(-500px, -500px);
-  }
-  50% {
-    transform: translate(-100px, -100px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+  animation: fadeIn 1s ease-out forwards;
 }
 
 .nav-link {
@@ -134,7 +117,6 @@ body {
     0 5 25px #1d19ec73,
     0 5 50px #1d19ec73,
     0 5 200px #1d19ec73;
-  color: #1c19ec;
   transform: translate(2px, 1px);
   transition:
     text-shadow 1s ease,
@@ -151,21 +133,8 @@ body {
   flex-shrink: none;
   min-width: 240px;
   text-shadow: 5px 5px 30px #0000005b;
-  animation: flyInLoggedInNotice 1s ease-out forwards;
-  transform: translate(-500px);
+  animation: fadeIn 1s ease-out forwards;
   font-weight: 500;
-}
-
-@keyframes flyInLoggedInNotice {
-  0% {
-    transform: translate(-500px);
-  }
-  50% {
-    transform: translate(-100px);
-  }
-  100% {
-    transform: translate(0);
-  }
 }
 
 /*login section*/
@@ -362,19 +331,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: flyIn 1s ease-out forwards;
-}
-
-@keyframes flyIn {
-  0% {
-    transform: scale(5) translate(0, -1000px);
-  }
-  50% {
-    transform: scale(2.5) translate(0, -500px);
-  }
-  100% {
-    transform: scale(1) translate(0, 0);
-  }
+  animation: fadeIn 1s ease-out forwards;
 }
 
 .TableContainer {
