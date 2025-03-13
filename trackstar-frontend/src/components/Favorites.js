@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import '../App.css'
 import Modal from 'react-modal'
@@ -17,8 +17,8 @@ const Favorites = () => {
   const favorites = useSelector((state) => state.favorites)
   const user = useSelector((state) => state.user)
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = useMemo(() => {
+    return async () => {
       try {
         const favoriteIds = favorites.map((favorite) => favorite.coingeckoId)
         const coinListResponse = await axios.get(
@@ -45,9 +45,11 @@ const Favorites = () => {
         console.error('Error fetching data:', error)
       }
     }
-
-    fetchData()
   }, [favorites])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const openModal = (crypto) => {
     setIsOpen(true)
