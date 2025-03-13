@@ -41,7 +41,16 @@ const useCryptoList = (fetchDataFunction, dependencies = []) => {
     setVisible((prevValue) => prevValue + 20)
   }
 
-  return { cryptos, visible, modalIsOpen, selectedCrypto, openModal, closeModal, loadMore, setVisible }
+  return {
+    cryptos,
+    visible,
+    modalIsOpen,
+    selectedCrypto,
+    openModal,
+    closeModal,
+    loadMore,
+    setVisible,
+  }
 }
 
 export default useCryptoList

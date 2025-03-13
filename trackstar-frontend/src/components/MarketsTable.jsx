@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const MarketsTable = ({
   cryptos,
@@ -24,12 +24,19 @@ const MarketsTable = ({
         {cryptos.slice(0, visible).map((crypto) => (
           <tr key={crypto.id} className="cryptoRow">
             <td>
-              <a href={`https://www.coingecko.com/en/coins/${crypto.id.toLowerCase()}`} rel="coingeckopage">
+              <a
+                href={`https://www.coingecko.com/en/coins/${crypto.id.toLowerCase()}`}
+                rel="coingeckopage"
+              >
                 <img src={crypto.image} alt="Logo" width="20px" />
               </a>
             </td>
             <td>
-              <a href={`https://www.coingecko.com/en/coins/${crypto.id.toLowerCase()}`} rel="coingeckopage" className="coinGeckoLink">
+              <a
+                href={`https://www.coingecko.com/en/coins/${crypto.id.toLowerCase()}`}
+                rel="coingeckopage"
+                className="coinGeckoLink"
+              >
                 {crypto.symbol.toUpperCase()}
               </a>
             </td>
@@ -38,8 +45,8 @@ const MarketsTable = ({
             <td>
               <button id="favBtn" onClick={() => addToFavorites(crypto.id)}>
                 {favorites.map((fav) => fav.coingeckoId).includes(crypto.id)
-                  ? '★'
-                  : '☆'}
+                  ? "★"
+                  : "☆"}
               </button>
             </td>
             <td>
@@ -53,7 +60,7 @@ const MarketsTable = ({
         ))}
       </tbody>
     </table>
-  )
-}
+  );
+};
 
-export default MarketsTable
+export default MarketsTable;

@@ -14,12 +14,17 @@ const Markets = () => {
   const user = useSelector((state) => state.user)
 
   const fetchMarketData = async () => {
-    const result = await axios.get('https://api.coingecko.com/api/v3/search/trending')
+    const result = await axios.get(
+      'https://api.coingecko.com/api/v3/search/trending',
+    )
     const trendingCoins = result.data.coins.map((coin) => coin.item.id)
     if (trendingCoins.length > 0) {
-      const marketDataResponse = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-        params: { vs_currency: 'usd', ids: trendingCoins.join(',') },
-      })
+      const marketDataResponse = await axios.get(
+        'https://api.coingecko.com/api/v3/coins/markets',
+        {
+          params: { vs_currency: 'usd', ids: trendingCoins.join(',') },
+        },
+      )
       return marketDataResponse.data
     }
     return []
@@ -43,17 +48,38 @@ const Markets = () => {
   }
 
   return (
-    <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
+    <div
+      className="MarketsContainer"
+      style={{ marginTop: user === null ? '150px' : '20px' }}
+    >
       <div className="TableContainer">
-        <MarketsTable cryptos={cryptos} visible={visible} addToFavorites={addToFavorites} favorites={favorites} openModal={openModal} />
-        <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Crypto Chart" className="Modal" overlayClassName="Overlay">
+        <MarketsTable
+          cryptos={cryptos}
+          visible={visible}
+          addToFavorites={addToFavorites}
+          favorites={favorites}
+          openModal={openModal}
+        />
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Crypto Chart"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
           <div id="cryptoChart"></div>
           <div id="chartBtnContainer">
-            <button onClick={closeModal} id="chartBtn">Close</button>
+            <button onClick={closeModal} id="chartBtn">
+              Close
+            </button>
           </div>
         </Modal>
       </div>
-      {visible < cryptos.length && <button onClick={loadMore} className="load-more-button">Load More</button>}
+      {visible < cryptos.length && (
+        <button onClick={loadMore} className="load-more-button">
+          Load More
+        </button>
+      )}
     </div>
   )
 }

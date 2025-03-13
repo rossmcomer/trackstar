@@ -15,14 +15,21 @@ const Favorites = () => {
 
   const fetchFavoriteData = async () => {
     const favoriteIds = favorites.map((favorite) => favorite.coingeckoId)
-    const coinListResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list')
+    const coinListResponse = await axios.get(
+      'https://api.coingecko.com/api/v3/coins/list',
+    )
     const coinList = coinListResponse.data
-    const favoriteCoins = coinList.filter((coin) => favoriteIds.includes(coin.id)).map((coin) => coin.id)
+    const favoriteCoins = coinList
+      .filter((coin) => favoriteIds.includes(coin.id))
+      .map((coin) => coin.id)
 
     if (favoriteCoins.length > 0) {
-      const marketDataResponse = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-        params: { vs_currency: 'usd', ids: favoriteCoins.join(',') },
-      })
+      const marketDataResponse = await axios.get(
+        'https://api.coingecko.com/api/v3/coins/markets',
+        {
+          params: { vs_currency: 'usd', ids: favoriteCoins.join(',') },
+        },
+      )
       return marketDataResponse.data
     }
     return []
@@ -44,20 +51,39 @@ const Favorites = () => {
   if (favorites.length < 1) {
     return (
       <div id="noFavoritesContainer">
-        <div id="noFavorites">No favorites to display! Add a favorite to get started!</div>
+        <div id="noFavorites">
+          No favorites to display! Add a favorite to get started!
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
+    <div
+      className="MarketsContainer"
+      style={{ marginTop: user === null ? '150px' : '20px' }}
+    >
       {user ? (
         <div className="TableContainer">
-          <MarketsTable cryptos={cryptos} visible={visible} addToFavorites={addToFavorites} favorites={favorites} openModal={openModal} />
-          <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Crypto Chart" className="Modal" overlayClassName="Overlay">
+          <MarketsTable
+            cryptos={cryptos}
+            visible={visible}
+            addToFavorites={addToFavorites}
+            favorites={favorites}
+            openModal={openModal}
+          />
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Crypto Chart"
+            className="Modal"
+            overlayClassName="Overlay"
+          >
             <div id="cryptoChart"></div>
             <div id="chartBtnContainer">
-              <button onClick={closeModal} id="chartBtn">Close</button>
+              <button onClick={closeModal} id="chartBtn">
+                Close
+              </button>
             </div>
           </Modal>
         </div>
@@ -66,7 +92,11 @@ const Favorites = () => {
           <div id="pleaseLoginNotice">Please log in to use this feature.</div>
         </div>
       )}
-      {visible < cryptos.length && <button onClick={loadMore} className="load-more-button">Load More</button>}
+      {visible < cryptos.length && (
+        <button onClick={loadMore} className="load-more-button">
+          Load More
+        </button>
+      )}
     </div>
   )
 }

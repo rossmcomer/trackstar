@@ -359,7 +359,8 @@ td {
   text-align: left;
 }
 
-thead, tbody {
+thead,
+tbody {
   width: 100%;
   white-space: nowrap;
 }
