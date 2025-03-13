@@ -7,7 +7,6 @@ const MarketsTable = ({
   favorites,
   openModal,
 }) => {
-  console.log(cryptos)
   return (
     <table className="marketsTable">
       <thead>

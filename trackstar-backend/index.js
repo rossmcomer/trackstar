@@ -15,11 +15,11 @@ const createAccountRouter = require('./controllers/create-account')
 app.use(cors())
 app.use(express.json())
 
-app.use('/users', usersRouter)
-app.use('/login', loginRouter)
-app.use('/logout', logoutRouter)
-app.use('/favorites', favoritesRouter)
-app.use('/create-account', createAccountRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+app.use('/api/logout', logoutRouter)
+app.use('/api/favorites', favoritesRouter)
+app.use('/api/create-account', createAccountRouter)
 
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)

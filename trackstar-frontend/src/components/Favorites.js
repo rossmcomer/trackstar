@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React from 'react'
 import axios from 'axios'
 import '../App.css'
 import Modal from 'react-modal'
@@ -6,66 +6,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createFavorite, removeFavorite } from '../reducers/favorites'
 import { notify } from '../reducers/notification'
 import MarketsTable from './MarketsTable'
-import { fetchModalData } from '../util/fetchModalData'
+import useCryptoList from '../hooks/useCryptoList'
 
 const Favorites = () => {
   const dispatch = useDispatch()
-  const [cryptos, setCryptos] = useState([])
-  const [visible, setVisible] = useState(10)
-  const [modalIsOpen, setIsOpen] = useState(false)
-  const [selectedCrypto, setSelectedCrypto] = useState(null)
   const favorites = useSelector((state) => state.favorites)
   const user = useSelector((state) => state.user)
 
-  const fetchData = useMemo(() => {
-    return async () => {
-      try {
-        const favoriteIds = favorites.map((favorite) => favorite.coingeckoId)
-        const coinListResponse = await axios.get(
-          'https://api.coingecko.com/api/v3/coins/list',
-        )
-        const coinList = coinListResponse.data
-        const favoritecoins = coinList
-          .filter((coin) => favoriteIds.includes(coin.id))
-          .map((coin) => coin.id)
-        if (favoritecoins.length > 0) {
-          const marketDataResponse = await axios.get(
-            'https://api.coingecko.com/api/v3/coins/markets',
-            {
-              params: {
-                vs_currency: 'usd',
-                ids: favoritecoins.join(','),
-              },
-            },
-          )
+  const fetchFavoriteData = async () => {
+    const favoriteIds = favorites.map((favorite) => favorite.coingeckoId)
+    const coinListResponse = await axios.get('https://api.coingecko.com/api/v3/coins/list')
+    const coinList = coinListResponse.data
+    const favoriteCoins = coinList.filter((coin) => favoriteIds.includes(coin.id)).map((coin) => coin.id)
 
-          setCryptos(marketDataResponse.data)
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+    if (favoriteCoins.length > 0) {
+      const marketDataResponse = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
+        params: { vs_currency: 'usd', ids: favoriteCoins.join(',') },
+      })
+      return marketDataResponse.data
     }
-  }, [favorites])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
-  const openModal = (crypto) => {
-    setIsOpen(true)
-    setSelectedCrypto(crypto)
+    return []
   }
 
-  const closeModal = () => {
-    setIsOpen(false)
-    setSelectedCrypto(null)
-  }
-
-  useEffect(() => {
-    if (!modalIsOpen || !selectedCrypto) return
-
-    fetchModalData(selectedCrypto)
-  }, [modalIsOpen, selectedCrypto])
+  const { cryptos, visible, modalIsOpen, openModal, closeModal, loadMore } =
+    useCryptoList(fetchFavoriteData, [favorites])
 
   const addToFavorites = (id) => {
     if (!favorites.map((fav) => fav.coingeckoId).includes(id)) {
@@ -77,46 +41,23 @@ const Favorites = () => {
     }
   }
 
-  const loadMore = () => {
-    setVisible((prevValue) => prevValue + 20)
-  }
-
   if (favorites.length < 1) {
     return (
       <div id="noFavoritesContainer">
-        <div id="noFavorites">
-          No favorites to display! Add a favorite to get started!
-        </div>
+        <div id="noFavorites">No favorites to display! Add a favorite to get started!</div>
       </div>
     )
   }
 
   return (
-    <div
-      className="MarketsContainer"
-      style={{ marginTop: user === null ? '150px' : '20px' }}
-    >
+    <div className="MarketsContainer" style={{ marginTop: user === null ? '150px' : '20px' }}>
       {user ? (
         <div className="TableContainer">
-          <MarketsTable
-            cryptos={cryptos}
-            visible={visible}
-            addToFavorites={addToFavorites}
-            favorites={favorites}
-            openModal={openModal}
-          />
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            contentLabel="Crypto Chart"
-            className="Modal"
-            overlayClassName="Overlay"
-          >
+          <MarketsTable cryptos={cryptos} visible={visible} addToFavorites={addToFavorites} favorites={favorites} openModal={openModal} />
+          <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Crypto Chart" className="Modal" overlayClassName="Overlay">
             <div id="cryptoChart"></div>
             <div id="chartBtnContainer">
-              <button onClick={closeModal} id="chartBtn">
-                Close
-              </button>
+              <button onClick={closeModal} id="chartBtn">Close</button>
             </div>
           </Modal>
         </div>
@@ -125,11 +66,7 @@ const Favorites = () => {
           <div id="pleaseLoginNotice">Please log in to use this feature.</div>
         </div>
       )}
-      {visible < cryptos.length && (
-        <button onClick={loadMore} className="load-more-button">
-          Load More
-        </button>
-      )}
+      {visible < cryptos.length && <button onClick={loadMore} className="load-more-button">Load More</button>}
     </div>
   )
 }
