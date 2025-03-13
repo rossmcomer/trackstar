@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
-
 import createAccountService from '../services/createAccount'
 import { notify } from '../reducers/notification'
 
