@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import '../App.css'
 import Modal from 'react-modal'
@@ -17,8 +17,8 @@ const Markets = () => {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = useMemo(() => {
+    return async () => {
       try {
         const result = await axios.get(
           'https://api.coingecko.com/api/v3/search/trending',
@@ -41,9 +41,11 @@ const Markets = () => {
         console.error('Error fetching data:', error)
       }
     }
-
-    fetchData()
   }, [])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const openModal = (crypto) => {
     setIsOpen(true)
