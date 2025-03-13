@@ -366,6 +366,7 @@ thead, tbody {
 
 .marketsTable {
   background-color: transparent;
+  backdrop-filter: blur(10px) saturate(131%);
 }
 
 th {
@@ -393,7 +394,6 @@ tr {
 td {
   color: #f2f2f2;
   text-align: center;
-  backdrop-filter: blur(10px) saturate(131%);
   background-color: rgba(17, 25, 40, 0.59);
   text-shadow: 1px 4px 100px #000000;
 }
