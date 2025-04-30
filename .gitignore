@@ -1,3 +1,5 @@
 docker-compose.yml
 trackstar-kp.pem
+trackstarkp.pem
 nginx.conf
+EC2-instructions.txt
